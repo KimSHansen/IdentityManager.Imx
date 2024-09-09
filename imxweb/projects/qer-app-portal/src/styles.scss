@@ -115,4 +115,8 @@ imx-data-explorer-accounts {
       background-color: $color-gray-90;
   }
 }
-
+//custom changes
+body .mat-toolbar.mat-primary,
+.eui-masthead {
+    background-color: red!important;
+}

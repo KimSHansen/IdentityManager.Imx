@@ -76,7 +76,7 @@ export class ServiceItemsEditModule {
     private readonly menuService: MenuService,
     logger: ClassloggerService) {
     logger.info(this, '▶️ ServiceItemsEditModule loaded');
-    this.setupMenu();
+   // this.setupMenu();
   }
 
   private setupMenu(): void {

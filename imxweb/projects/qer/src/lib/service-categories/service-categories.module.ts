@@ -84,7 +84,7 @@ export class ServiceCategoriesModule {
     private readonly menuService: MenuService,
     logger: ClassloggerService) {
     logger.info(this, '▶︝ ServiceCategoriesModule loaded');
-    this.setupMenu();
+   // this.setupMenu();
   }
 
   private setupMenu(): void {

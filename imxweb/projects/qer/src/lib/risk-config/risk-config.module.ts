@@ -79,7 +79,7 @@ export class RiskConfigModule {
     private readonly menuService: MenuService,
     logger: ClassloggerService) {
     logger.info(this, '▶️ RiskConfigModule loaded');
-    this.setupMenu();
+    //this.setupMenu();
   }
 
   private setupMenu(): void {

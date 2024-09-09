@@ -116,7 +116,7 @@ export class RequestConfigModule {
     private readonly menuService: MenuService,
     logger: ClassloggerService) {
     logger.info(this, '▶︝ RequestConfigModule loaded');
-    this.setupMenu();
+   // this.setupMenu();
   }
 
   private setupMenu(): void {

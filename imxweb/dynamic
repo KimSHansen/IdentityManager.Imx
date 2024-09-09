@@ -1,0 +1,5 @@
+
+> imxweb@9.2.1 build:watch
+> ng build --watch --configuration development rps
+
+Terminate batch job (Y/N)? 

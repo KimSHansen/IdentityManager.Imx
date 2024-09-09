@@ -104,7 +104,7 @@ const routes: Routes = [
 export class ApprovalWorkFlowModule {
   constructor(private readonly menuService: MenuService, logger: ClassloggerService) {
     logger.info(this, '▶️ ApprovalWorkFlowModule loaded');
-    this.setupMenu();
+    //this.setupMenu();
   }
 
   private setupMenu(): void {

@@ -8,6 +8,11 @@
     margin-right: 5px;
   }
 
+  .eui-light-theme .mat-toolbar.mat-primary {
+    background-color: red;
+    color: $color-gray-0;
+  }
+
   .imx-masthead-space {
     flex: 1 1 auto;
   }
@@ -96,3 +101,4 @@
     }
   }
 }
+

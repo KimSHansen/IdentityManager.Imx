@@ -85,7 +85,7 @@ export class EditReportModule {
   constructor(
     private readonly menuService: MenuService,
   ) {
-    this.setupMenu();
+    //this.setupMenu();
   }
 
   private setupMenu(): void {
