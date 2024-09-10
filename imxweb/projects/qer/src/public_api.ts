@@ -204,3 +204,6 @@ export { ViewDevicesComponent } from './lib/view-devices/view-devices-home/view-
 export { ViewDevicesSidesheetComponent } from './lib/view-devices/view-devices-sidesheet/view-devices-sidesheet.component';
 export { AuthenticationFactors } from './lib/admin/authentication-factors.interface';
 
+export { ContractsModule } from './lib/contracts/contracts.module';
+export { UserContractsComponent } from './lib/contracts/user-contracts/user-contracts.component';
+export { UserTileComponentComponent } from './lib/contracts/user-tile-component/user-tile-component.component';

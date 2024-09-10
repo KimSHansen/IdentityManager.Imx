@@ -42,6 +42,7 @@ import {
   LdsReplaceModule,
   QbmModule,
   TileModule,
+  RouteGuardService,
 } from 'qbm';
 
 
@@ -57,6 +58,13 @@ import { UserModule } from './user/user.module';
 import { BusinessOwnerChartSummaryComponent } from './wport/businessowner-chartsummary/businessowner-chartsummary.component';
 import { StartComponent } from './wport/start/start.component';
 
+import { UserContractsComponent } from './contracts/user-contracts/user-contracts.component';
+import { ContractsModule } from './contracts/contracts.module';
+import { UserTileComponentComponent } from './contracts/user-tile-component/user-tile-component.component';
+
+import { RouterModule, Router, Routes } from '@angular/router';
+
+
 export function initConfig(config: QerService): () => Promise<any> {
   return () =>
     new Promise<any>(async (resolve: any) => {
@@ -67,6 +75,15 @@ export function initConfig(config: QerService): () => Promise<any> {
     });
 }
 
+const routes: Routes = [
+  {
+    path: 'contracts',
+    component: UserContractsComponent,
+    canActivate: [RouteGuardService],
+    resolve: [RouteGuardService]
+  }
+]
+
 // @dynamic
 @NgModule({
   declarations: [
@@ -76,6 +93,8 @@ export function initConfig(config: QerService): () => Promise<any> {
   ],
   imports: [
     CommonModule,
+    ContractsModule,
+    RouterModule.forChild(routes),
     QbmModule,
     CdrModule,
     TranslateModule,
@@ -96,6 +115,9 @@ export function initConfig(config: QerService): () => Promise<any> {
     DataTreeModule,
     ShoppingCartValidationDetailModule,
     FkAdvancedPickerModule,
+  ],
+  exports: [UserContractsComponent,
+    UserTileComponentComponent
   ],
   providers: [
     {
