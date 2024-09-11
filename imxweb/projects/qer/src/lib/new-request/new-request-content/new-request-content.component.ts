@@ -257,5 +257,27 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   
   //}
 
+//To post an element to API
+  // private PostObject(inputParameterName: any): MethodDescriptor<PeriodicElement> {
+  //   return {
+  //     path: `/portal/import`,
+  //     parameters: [
+  //       {
+  //         name: 'inputParameterName',
+  //         value: inputParameterName,
+  //         in: 'body'
+  //       },
+  //     ],
+  //     method: 'POST',
+  //     headers: {
+  //       'imx-timezone': TimeZoneInfo.get(),
+  //     },
+  //     credentials: 'include',
+  //     observe: 'response',
+  //     responseType: 'json'
+  //   };
+  // }
+
+
 }
 
