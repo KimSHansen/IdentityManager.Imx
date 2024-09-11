@@ -47,6 +47,17 @@ import { NewRequestSelectionService } from '../new-request-selection.service';
 import { NewRequestAddToCartService } from '../new-request-add-to-cart.service';
 import { ProjectConfigurationService } from '../../project-configuration/project-configuration.service';
 
+//Custom imports:
+import { MethodDescriptor, TimeZoneInfo } from 'imx-qbm-dbts';
+import { AppConfigService } from 'qbm';
+import { MatDialog } from '@angular/material/dialog';
+import { ContractDialogComponent } from './contract-dialog/contract-dialog.component';
+
+export interface ContractObject{
+  ID: string;
+  Contract: string;
+}
+
 @Component({
   selector: 'imx-new-request-content',
   templateUrl: './new-request-content.component.html',
@@ -62,6 +73,9 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   public selectedCategory: PortalServicecategories;
   public peerGroupEnabled = true;
 
+  //Custom variable
+  contractList:[] = [];
+
   constructor(
     public readonly orchestration: NewRequestOrchestrationService,
     public readonly selectionService: NewRequestSelectionService,
@@ -71,6 +85,8 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly sidesheetService: EuiSidesheetService,
     private readonly translate: TranslateService,
+    private readonly config: AppConfigService, //Custom
+    public dialog: MatDialog, //Custom
   ) {
     
     this.navLinks.push({
@@ -109,6 +125,11 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   }
 
   public async ngOnInit(): Promise<void> {
+
+    //Custom
+    this.contracts();
+
+
     const projectConfig = await this.projectConfigService.getConfig();
     const canSelectFromTemplate = projectConfig.ITShopConfig.VI_ITShop_ProductSelectionFromTemplate;
     const canSelectByRefUser = projectConfig.ITShopConfig.VI_ITShop_ProductSelectionByReferenceUser;
@@ -183,6 +204,58 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   }
 
   public async pushCandidatesToCart(): Promise<void> {
-    this.addToCartService.addItemsToCart();
+    const dialogRef = this.dialog.open(ContractDialogComponent, {
+      data: {contractList:this.contractList}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result =="" || result == undefined){
+        return;
+      }
+        this.addToCartService.addItemsToCart();
+    });
+
   }
+ 
+  //Custom functions 
+  public async contracts(): Promise<ContractObject> {
+    const data = await this.config.apiClient.processRequest<[]>(this.getContracts());
+    this.contractList = data
+    return
+  }
+  
+  //(first one without parameters)
+  private getContracts(): MethodDescriptor<ContractObject> {
+    //const parameters = [];
+    return {
+      path: `/portal/dummycontracts`,
+      method: 'GET',
+      headers: {
+        'imx-timezone': TimeZoneInfo.get(),
+      },
+      credentials: 'include',
+      observe: 'response',
+      responseType: 'json',
+    };
+  
+  }
+
+  //This with parameters
+  // private getContracts(): MethodDescriptor<ContractObject> {
+  //   const parameters = [];
+  //   return {
+  //     path: `/portal/dummycontracts`,
+  //     parameters,
+  //     method: 'GET',
+  //     headers: {
+  //       'imx-timezone': TimeZoneInfo.get(),
+  //     },
+  //     credentials: 'include',
+  //     observe: 'response',
+  //     responseType: 'json',
+  //   };
+  
+  //}
+
 }
+

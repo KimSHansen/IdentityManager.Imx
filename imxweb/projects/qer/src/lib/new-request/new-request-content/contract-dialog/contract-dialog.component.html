@@ -1,0 +1,13 @@
+<mat-form-field>
+    <mat-label>Select contract</mat-label>
+    <mat-select [(value)]="selectedContractID" (selectionChange)="getContractID($event.value)" required>
+      <mat-option *ngFor="let item of contracts" [value]="item.ID" >
+        {{ item.Contract }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
