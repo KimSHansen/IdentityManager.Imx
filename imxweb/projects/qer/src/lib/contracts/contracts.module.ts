@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserContractsComponent } from './user-contracts/user-contracts.component';
-import { MenuService } from 'qbm';
+import { MenuService } from 'qbm'
 import { UserTileComponentComponent } from './user-tile-component/user-tile-component.component';
 import { TilesModule } from './../tiles/tiles.module';
 import { MatButtonModule } from '@angular/material/button';
+import { Title } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ private setupMenu(): void {
           id: 'CONTRACTS_SELECT',
           route: 'contracts',
           title: '#LDS#Contracts'
-        },
+        }
         ],
       };
     }  
