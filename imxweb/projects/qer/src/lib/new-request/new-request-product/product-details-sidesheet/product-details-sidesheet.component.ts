@@ -46,6 +46,9 @@ export class ProductDetailsSidesheetComponent implements OnInit {
   /** A list of properties, that cannot be customized in the Admin Portal */
   protected fixedProductProperties = ['ServiceCategoryFullPath', 'TableName', 'Tags'];
 
+  protected ldsEntitlementInfo =
+  '#LDS#Here you can get an overview of the entitlements associated with the product. If you request the product, the recipient will get the listed entitlements.';
+
   /** A mapping between properties/columns and a css class to visualize the property value */
   private cssPropertyMapping = new Map<string, string>([
     ['ServiceCategoryFullPath', 'link'],

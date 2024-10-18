@@ -4,6 +4,26 @@
 
 ## Change log
 
+### October 8, 2024
+- 465213: Fixes an infinite loop if the an invalid value is set on a basic CDR.
+- 466404: Fixes an issue with setting today's date as the start date of a delegation.
+- 464909: Fixes an issue with the removal of IT shop assignments from newly created applications.
+- 466217: Fixes timing issues that could cause the search result to become out of sync with the search term entered by the user.
+
+### September 9, 2024
+- 463113: Fixes an issue, regarding the "Unsubscribed as from" property, that doesn't work as expected.
+- 462249: Fixes the "Property not found: UID_UNSRoot" error, when switching to tab "Child System Entitlements" on the Data Explorer's system Entitlements page.
+- 443363: Synchronizes the entity in case of an error.
+- 460948:
+- 457652 Fixes the missing notification, when request has a Valid From Date in the past and the approver opens the request in the future
+- 463491: Fixes the information, that is displayed on _Pending Attestations > Policy violations of attestation case_.
+- 271561: Added a CDR editor for bitmask properties.
+- 456076: Fixes an issue, regarding the pre-assignment of the recipient via an URL parameter.
+- 455439: Fixes an issue, regarding MFA related configuration parameters.
+- 271561: Adds a new CDR editor for bitmask properties.
+- 456427: Fixes the count for added items on the _Add To Cart_ snackbar message.
+- 464618: Fixes an issue regarding custom filter on the manage shops page.
+
 ### August 12, 2024
 - 459770: Fixed an issue where the request parameter validation result was not working on first input.
 - 462048: Fixed an issue with delegation search caching.

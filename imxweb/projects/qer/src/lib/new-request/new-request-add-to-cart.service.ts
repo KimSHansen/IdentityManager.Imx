@@ -154,8 +154,8 @@ export class NewRequestAddToCartService {
           orgs.map((item) => item.XObjectKey.value),
           recipientsWrapper?.uids
         );
-        this.possibleItems += roles.length;
-        this.savedItems += roles.length;
+        this.possibleItems = roles.length;
+        this.savedItems = roles.length;
       } finally {
         setTimeout(() => this.busyIndicator.hide());
       }

@@ -25,7 +25,6 @@
  */
 
 import { Injectable, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { CollectionLoadParameters, EntityValue, IWriteValue, LocalProperty, ValueStruct } from 'imx-qbm-dbts';
@@ -225,7 +224,6 @@ export class NewRequestOrchestrationService implements OnDestroy {
     private readonly qerClient: QerApiService,
     private readonly entityService: EntityService,
     private readonly personProvider: PersonService,
-    private readonly activatedRoute: ActivatedRoute,
     private readonly selectionService: NewRequestSelectionService,
     settingsService: SettingsService
   ) {
@@ -280,6 +278,19 @@ export class NewRequestOrchestrationService implements OnDestroy {
     this.serviceCategoryAbortController = new AbortController();
   }
 
+  /***
+   * Set the recipient to the identity with the specified uid.
+   */
+  public async setRecipient(uidPerson: string): Promise<void> {
+    if (!uidPerson) {
+      return;
+    }
+    await this.recipients.Column.PutValueStruct({
+      DataValue: uidPerson,
+      DisplayValue: await this.getPersonDisplay(uidPerson),
+    });
+  }
+
   private async initRecipients(): Promise<void> {
     // define the recipients as a multi-valued property
     const recipientsProp = new LocalProperty();
@@ -305,16 +316,6 @@ export class NewRequestOrchestrationService implements OnDestroy {
       DisplayValue: await this.getPersonDisplay(this.userUid),
     });
 
-    const uidPerson = this.activatedRoute.snapshot.paramMap.get('UID_Person');
-
-    if (uidPerson) {
-      await this.recipients.Column.PutValueStruct({
-        DataValue: uidPerson,
-        DisplayValue: await this.getPersonDisplay(uidPerson),
-      });
-
-      // TODO in this case, CanRequestForSomebodyElse is false
-    }
     this.defaultUser = {
       DataValue: this.recipients.Column.GetValue(),
       DisplayValue: this.recipients.Column.GetDisplayValue(),

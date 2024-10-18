@@ -135,8 +135,10 @@ export class RequestActionService {
 
     const unsubscribeProperty = this.requestHistoryService.PortalItshopRequestsSchema.Columns.ValidUntilUnsubscribe;
     unsubscribeProperty.IsReadOnly = false;
+    const today = new Date();
+    today.setHours(0,0,0,0);
     const unsubscription = new BaseCdr(
-      this.entityService.createLocalEntityColumn(unsubscribeProperty, undefined, { ValueConstraint: { MinValue: new Date() } })
+      this.entityService.createLocalEntityColumn(unsubscribeProperty, undefined, { ValueConstraint: { MinValue: today } })
     );
 
     return this.editAction({

@@ -355,6 +355,9 @@ export class NewRequestProductComponent implements OnInit, OnDestroy {
         }
       })
     );
+        
+    // pre-assign the recipient by URL parameter
+    this.orchestration.setRecipient(this.route.snapshot.queryParams['UID_Person'])
   }
 
   public ngOnDestroy(): void {

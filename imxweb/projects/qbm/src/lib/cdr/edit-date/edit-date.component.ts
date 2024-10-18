@@ -179,6 +179,7 @@ export class EditDateComponent implements CdrEditor, OnDestroy {
 
     // Beware: the columnContainer used date while the date editor uses moment!!
     const date = value == null ? undefined : value.toDate();
+    const resetValue = this.columnContainer.value;
     this.logger.debug(this, 'writeValue called with value', date);
     if (!this.columnContainer.canEdit || this.columnContainer.value === date) {
       return;
@@ -192,6 +193,7 @@ export class EditDateComponent implements CdrEditor, OnDestroy {
       await this.columnContainer.updateValue(date);
     } catch (error) {
       this.errorHandler.handleError(error);
+      this.control?.setValue(resetValue ? moment(resetValue) : undefined);
     } finally {
       this.isBusy = false;
       this.isWriting = false;

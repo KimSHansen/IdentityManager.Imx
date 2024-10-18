@@ -55,6 +55,11 @@ export interface CdrEditor {
   control: AbstractControl;
 
   /**
+   * Determines, if the control should only be validated after the value has been changed
+   */
+  validateOnlyOnChange?: boolean;
+
+  /**
    * An event, that is emitted, if the value of the cdr has changed.
    */
   valueHasChanged?: EventEmitter<ValueHasChangedEventArg>;
