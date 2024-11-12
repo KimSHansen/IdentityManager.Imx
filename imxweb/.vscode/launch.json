@@ -5,6 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch Edge (QER App Portal)",
+      "request": "launch",
+      "type": "pwa-msedge",
+      "url": "http://localhost:4200/",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Edge Dev tools (QER App Portal)",
+      "request": "launch",
+      "type": "vscode-edge-devtools",
+      "url": "http://localhost:4200/",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "type": "firefox",
       "request": "launch",
       "reAttach": true,
@@ -34,6 +48,7 @@
       "url": "http://localhost:4200/",
       "webRoot": "${workspaceFolder}",
     },
+
     {
       "name": "QER App Portal (Chrome - SSL)",
       "request": "launch",
