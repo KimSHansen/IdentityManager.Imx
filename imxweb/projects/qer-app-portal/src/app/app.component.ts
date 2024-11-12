@@ -33,6 +33,7 @@ import {
   ImxTranslationProviderService,
   ISessionState,
   MenuService,
+  RelatedApplication,
   SplashService,
   SystemInfoService,
 } from 'qbm';
@@ -42,7 +43,7 @@ import { ProjectConfigurationService, UserModelService, SettingsComponent, QerAp
 import { ProfileSettings, QerProjectConfig } from 'imx-api-qer';
 import { ProjectConfig } from 'imx-api-qbm';
 import { MatDialog } from '@angular/material/dialog';
-import { EuiLoadingService, EuiTheme, EuiThemeService, EuiTopNavigationItem } from '@elemental-ui/core';
+import { EuiLoadingService, EuiTheme, EuiThemeService, EuiTopNavigationItem, EuiTopNavigationItemType } from '@elemental-ui/core';
 import { TranslateService } from '@ngx-translate/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { getBaseHref, HEADLESS_BASEHREF } from './app.module';
@@ -109,6 +110,24 @@ export class AppComponent implements OnInit, OnDestroy {
           }
 
           this.menuItems = await menuService.getMenuItems(systemInfo.PreProps, features, true, config, groups);
+
+          // Get related applications from api
+          const relatedApplications = await this.qerClient.client.portal_relatedapplications_get();
+          // Recursively convert related application structure to EuiMenuItem structure
+          const mapApplicationToMenuItem = (app: RelatedApplication): EuiTopNavigationItem => ({
+            type: app.ChildApps?.length ? EuiTopNavigationItemType.Menu : EuiTopNavigationItemType.ExternalLink,
+            text: app.Display,
+            url: app.Url,
+            items: app.ChildApps?.map(mapApplicationToMenuItem),
+          });
+          // // Add a new menu item containing the apps as child items
+          if (relatedApplications.length > 0) {
+            this.menuItems.push({
+              type: EuiTopNavigationItemType.Menu,
+              text: await this.translateService.get('#LDS#Heading Other Web Applications').toPromise(),
+              items: relatedApplications.map(mapApplicationToMenuItem),
+            });
+          }
 
           ieWarningService.showIe11Banner();
 
