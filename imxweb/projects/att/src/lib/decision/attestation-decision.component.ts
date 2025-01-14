@@ -378,7 +378,7 @@ export class AttestationDecisionComponent implements OnInit, OnDestroy {
       attestationCaseWithPolicy = (
         await this.attestationCases.get(
           {
-            Escalation: this.viewEscalation,
+            Escalation: this.isUserEscalationApprover,
             uidpolicy: attestationCase.UID_AttestationPolicy.value,
             filter: [
               {
