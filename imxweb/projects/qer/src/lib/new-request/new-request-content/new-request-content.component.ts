@@ -30,9 +30,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 import { PortalServicecategories } from 'imx-api-qer';
-import { IWriteValue, MultiValue } from 'imx-qbm-dbts';
+import { EntityCollectionData, EntityData, IWriteValue, MethodDescriptor, MultiValue } from 'imx-qbm-dbts';
 
-import { LdsReplacePipe } from 'qbm';
+import { ImxTranslationProviderService, LdsReplacePipe, AppConfigService } from 'qbm';
 import { NewRequestOrchestrationService } from '../new-request-orchestration.service';
 import { NewRequestPeerGroupComponent } from '../new-request-peer-group/new-request-peer-group.component';
 import { NewRequestProductComponent } from '../new-request-product/new-request-product.component';
@@ -46,6 +46,16 @@ import { SelectedProductItem } from '../new-request-selected-products/selected-p
 import { NewRequestSelectionService } from '../new-request-selection.service';
 import { NewRequestAddToCartService } from '../new-request-add-to-cart.service';
 import { ProjectConfigurationService } from '../../project-configuration/project-configuration.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SpMultipleprofitcentersDialogComponent } from './sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component'
+import { V2Client, TypedClient } from 'imx-api-ccc';
+
+export interface ProfitCenterObject {
+  UID_Person: string;
+  UID_ProfitCenter: string;
+  ShortName: string;
+  AccountNumber: string;
+}
 
 @Component({
   selector: 'imx-new-request-content',
@@ -61,8 +71,15 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   public showCatSlider = false;
   public selectedCategory: PortalServicecategories;
   public peerGroupEnabled = true;
+  v2Client: V2Client;
+  typedClient: TypedClient;
+  profitCenterList = [];
+  
+  //profitCenters: ProfitCenterObject[] = [];
+
 
   constructor(
+    private readonly appConfig: AppConfigService,
     public readonly orchestration: NewRequestOrchestrationService,
     public readonly selectionService: NewRequestSelectionService,
     private readonly addToCartService: NewRequestAddToCartService,    
@@ -71,8 +88,14 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly sidesheetService: EuiSidesheetService,
     private readonly translate: TranslateService,
+    public dialog: MatDialog,
+    private readonly translationProvider: ImxTranslationProviderService,
   ) {
     
+    const schemaProvider = appConfig.client;
+    this.v2Client = new V2Client(appConfig.apiClient, schemaProvider);
+    this.typedClient = new TypedClient(this.v2Client, this.translationProvider);
+
     this.navLinks.push({
       id: 0,
       title: '#LDS#Heading All Products',
@@ -112,6 +135,7 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     const projectConfig = await this.projectConfigService.getConfig();
     const canSelectFromTemplate = projectConfig.ITShopConfig.VI_ITShop_ProductSelectionFromTemplate;
     const canSelectByRefUser = projectConfig.ITShopConfig.VI_ITShop_ProductSelectionByReferenceUser;
+    this.ProfitCenters();
 
     if (canSelectByRefUser) {
       this.navLinks.push({
@@ -183,6 +207,47 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   }
 
   public async pushCandidatesToCart(): Promise<void> {
-    this.addToCartService.addItemsToCart();
+
+    const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
+      //width: '250px',
+      data: {profitCenters: this.profitCenterList}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == "" || result == undefined){
+        return;
+      }
+      console.log('pushCandidatesToCart: ' + result);
+     // const id = result;
+      this.addToCartService.addItemsToCart();
+    });
+
+    
   }
+
+   public async ProfitCenters(): Promise<ProfitCenterObject> {
+     //const data = await this.v2Client.portal_Employments_get();
+     const data = await this.typedClient.PortalGetemployments.Get('1f4d133e-18b5-4baa-ac36-b2788263485a'); //this.v2Client.portal_GetEmployments_get('1f4d133e-18b5-4baa-ac36-b2788263485a');
+     //this.profitCenterList.push(data);
+    //this.profitCenters.push(data[0].);
+    if (data.totalCount > 1) {
+      console.log('User have more than one profitcenter');
+    }
+  
+    for(let item of data.Data){
+    
+    this.profitCenterList.push({
+       ShortName: item.GetEntity().GetColumn('ShortName').GetValue(),
+       AccountNumber: item.GetEntity().GetColumn('AccountNumber').GetValue(),
+       UID_Person: item.GetEntity().GetColumn('UID_Person').GetValue(),
+       UID_ProfitCenter: item.GetEntity().GetColumn('UID_ProfitCenter').GetValue()});
+   }
+     return;;
+   }
+
+
+
+
+
+  
 }
