@@ -81,6 +81,7 @@ export class CartItemsService {
     const cartItem = this.qerClient.typedClient.PortalCartitem.createEntity();
     cartItem.UID_PersonOrdered.value = requestableServiceItemForPerson.UidPerson;
     cartItem.UID_ITShopOrg.value = requestableServiceItemForPerson.UidITShopOrg;
+    cartItem.UID_ProfitCenter.value = requestableServiceItemForPerson.UidProfitCenter; //'3dc0f51b-e587-40bf-8935-3b601e997b59';
     if (requestableServiceItemForPerson?.UidPatternItem?.length > 0) {
       cartItem.UID_PatternItem.value = requestableServiceItemForPerson.UidPatternItem;
     }

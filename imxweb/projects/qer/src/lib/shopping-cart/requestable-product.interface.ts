@@ -29,4 +29,5 @@ import { RequestableProductForPerson } from "imx-api-qer";
 
 export interface RequestableProduct extends RequestableProductForPerson {
   UidPatternItem?: string;
+  UidProfitCenter?: string;
 }

@@ -206,32 +206,56 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     this.selectionService.clearProducts();
   }
 
+  // public async pushCandidatesToCart(): Promise<void> {
+
+  //   const recipientsUids = MultiValue.FromString(this.orchestration.recipients.value).GetValues();
+  //   //let dialogRef //<SpMultipleprofitcentersDialogComponent, any>
+
+  //   for (const uidRecipient of recipientsUids) {
+  //     let profitCenterList = [];
+      
+  //     let a = this.ProfitCenters(uidRecipient, profitCenterList);
+      
+  //     const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
+  //     //width: '250px',
+  //     data: {profitCenters: profitCenterList}
+  //   });
+  
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if(result == "" || result == undefined){
+  //       return;
+  //     }
+  //   console.log('pushCandidatesToCart: ' + result);
+  //    // const id = result;
+  //   });
+  //   this.addToCartService.addItemsToCart();
+  // }
+  // }
+
   public async pushCandidatesToCart(): Promise<void> {
-
     const recipientsUids = MultiValue.FromString(this.orchestration.recipients.value).GetValues();
-    //let dialogRef //<SpMultipleprofitcentersDialogComponent, any>
-
+  
     for (const uidRecipient of recipientsUids) {
       let profitCenterList = [];
       
-      let a = this.ProfitCenters(uidRecipient, profitCenterList);
+      await this.ProfitCenters(uidRecipient, profitCenterList);
       
       const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
-      //width: '250px',
-      data: {profitCenters: profitCenterList}
-    });
+        data: { profitCenters: profitCenterList }
+      });
   
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == "" || result == undefined){
+      const result = await dialogRef.afterClosed().toPromise();
+      
+      if (result == "" || result == undefined) {
         return;
       }
-    
+  
       console.log('pushCandidatesToCart: ' + result);
-     // const id = result;
-    //  this.addToCartService.addItemsToCart();
-    });
+    }
+  
+    this.addToCartService.addItemsToCart();
   }
-  }
+  
 
    public async ProfitCenters(uidRecipient: string, profitCenterList: any[]): Promise<ProfitCenterObject> {
      //const data = await this.v2Client.portal_Employments_get();
