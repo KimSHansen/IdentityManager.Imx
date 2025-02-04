@@ -233,25 +233,25 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   // }
 
   public async pushCandidatesToCart(): Promise<void> {
-    const recipientsUids = MultiValue.FromString(this.orchestration.recipients.value).GetValues();
-  
-    for (const uidRecipient of recipientsUids) {
-      let profitCenterList = [];
+    // const recipientsUids = MultiValue.FromString(this.orchestration.recipients.value).GetValues();
+    
+    // for (const uidRecipient of recipientsUids) {
+    //   let profitCenterList: ProfitCenterObject[] = [];
       
-      await this.ProfitCenters(uidRecipient, profitCenterList);
+    //   await this.ProfitCenters(uidRecipient, profitCenterList);
       
-      const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
-        data: { profitCenters: profitCenterList }
-      });
+    //   const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
+    //     data: { profitCenters: profitCenterList }
+    //   });
   
-      const result = await dialogRef.afterClosed().toPromise();
+    //   const result = await dialogRef.afterClosed().toPromise();
       
-      if (result == "" || result == undefined) {
-        return;
-      }
+    //   if (result == "" || result == undefined) {
+    //     return;
+    //   }
   
-      console.log('pushCandidatesToCart: ' + result);
-    }
+    //   console.log('pushCandidatesToCart: ' + result);
+    // }
   
     this.addToCartService.addItemsToCart();
   }

@@ -10,6 +10,8 @@ export class SpMultipleprofitcentersDialogComponent implements OnInit {
 
   selectedProfitCenter: string;
   profitcenters: string[];
+  DisplayProduct: string;
+  DisplayPerson: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -19,6 +21,8 @@ export class SpMultipleprofitcentersDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.profitcenters = this.data.profitCenters;
+    this.DisplayProduct = this.data.DisplayProduct;
+    this.DisplayPerson = this.data.DisplayPerson;
     console.log(this.profitcenters);
   }
 
