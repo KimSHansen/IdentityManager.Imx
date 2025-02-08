@@ -65,7 +65,7 @@ import { MatTableModule } from '@angular/material/table';
 import { NewRequestReferenceUserCardComponent } from './new-request-header/new-request-reference-user-card/new-request-reference-user-card.component';
 import { ElementVisibilityDirective } from './element-visibility.directive';
 import { PeerGroupDiscardSelectedComponent } from './new-request-peer-group/peer-group-discard-selected.component';
-import { SpMultipleprofitcentersDialogComponent } from './new-request-content/sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component';
+import { SpMultipleprofitcentersDialogComponent } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component';
 @NgModule({
   declarations: [
     NewRequestComponent,

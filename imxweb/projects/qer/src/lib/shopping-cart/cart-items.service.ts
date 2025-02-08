@@ -39,7 +39,7 @@ import { RequestableProduct } from './requestable-product.interface';
 
 //Egen kode - start
 import { ProfitCenterObject } from '../new-request/new-request-content/new-request-content.component';
-import { SpMultipleprofitcentersDialogComponent } from '../new-request/new-request-content/sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component';
+import { SpMultipleprofitcentersDialogComponent } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component';
 import { TypedClient, V2Client } from 'imx-api-ccc';
 import { MatDialog } from '@angular/material/dialog';
 //Egen kode - slutt

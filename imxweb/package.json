@@ -9,6 +9,7 @@
     "build": "ng build",
     "build:watch": "ng build --watch --configuration development",
     "build:watch:dynamic": "ng build --watch --configuration dynamic",
+    "build:dynamic": "ng build --configuration dynamic",
     "build:app": "ng build --aot --configuration production",
     "build:app:debug": "ng build --configuration production --source-map true",
     "build:lib": "ng build --configuration production",
@@ -108,6 +109,7 @@
     "imx-api-aob": "file:imx-modules/imx-api-aob.tgz",
     "imx-api-apc": "file:imx-modules/imx-api-apc.tgz",
     "imx-api-att": "file:imx-modules/imx-api-att.tgz",
+    "imx-api-ccc": "file:imx-modules/imx-api-ccc.tgz",
     "imx-api-cpl": "file:imx-modules/imx-api-cpl.tgz",
     "imx-api-dpr": "file:imx-modules/imx-api-dpr.tgz",
     "imx-api-hds": "file:imx-modules/imx-api-hds.tgz",
@@ -125,9 +127,8 @@
     "imx-api-uci": "file:imx-modules/imx-api-uci.tgz",
     "imx-qbm-dbts": "file:imx-modules/imx-qbm-dbts.tgz"
   },
-
   "overrides": {
-    "postcss": "8.4.31",        
+    "postcss": "8.4.31",
     "tough-cookie": "4.1.3",
     "webpack-dev-middleware": "5.3.4",
     "xml2js": "0.5.0"

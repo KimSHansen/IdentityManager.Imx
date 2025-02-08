@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{DisplayPerson}} - {{DisplayProduct}}</h2>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Select profitcenter</mat-label>
+        <mat-select [(value)]="selectedProfitCenter" (selectionChange)="getProfitCenterID($event.value)" required>
+            <mat-option *ngFor="let profitCenter of profitcenters" [value]="profitCenter.UID_ProfitCenter">
+                {{profitCenter.AccountNumber}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close color="primary" >
+            {{ '#LDS#Cancel' | translate }}
+          </button>
+        <!-- <button mat-button mat-dialog-close>Cancel</button> -->
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="closeDialog()">{{ '#LDS#OK' | translate }}</button>
+    </mat-dialog-actions>
+</div>

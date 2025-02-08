@@ -47,7 +47,7 @@ import { NewRequestSelectionService } from '../new-request-selection.service';
 import { NewRequestAddToCartService } from '../new-request-add-to-cart.service';
 import { ProjectConfigurationService } from '../../project-configuration/project-configuration.service';
 import { MatDialog } from '@angular/material/dialog';
-import { SpMultipleprofitcentersDialogComponent } from './sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component'
+//import { SpMultipleprofitcentersDialogComponent } from '../../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component'
 import { V2Client, TypedClient } from 'imx-api-ccc';
 
 export interface ProfitCenterObject {
