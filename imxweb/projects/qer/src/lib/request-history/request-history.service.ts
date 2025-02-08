@@ -193,9 +193,11 @@ export class RequestHistoryService {
       },
     });
 
-    item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]);
+   // item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]);
+    item.UID_ITShopOrg.Column.PutValue(pwo.UID_Org.value);
     item.UID_PersonOrdered.Column.PutValue(pwo.UID_PersonOrdered.value);
-
+    item.UID_ProfitCenter.Column.PutValue("9a04e91c-740e-4005-978e-c19f2e598d9a");//(pwo.UID_ProfitCenter.value);
+    item.OrderReason.Column.PutValue("Dilldall");
     await this.qerClient.typedClient.PortalCartitem.Post(item);
 
     return item;
