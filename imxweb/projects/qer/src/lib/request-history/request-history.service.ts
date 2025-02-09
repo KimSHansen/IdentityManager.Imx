@@ -49,12 +49,19 @@ import { ItshopRequestData } from '../itshop/request-info/itshop-request-data';
 import { QerApiService } from '../qer-api-client.service';
 import { DataSourceToolbarExportMethod, DataSourceToolbarFilter } from 'qbm';
 import { ItshopRequestService } from '../itshop/itshop-request.service';
-
+//Egen kode - start
+import { SpMultipleprofitcentersService } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters.service';
+import { RequestableProduct } from '../shopping-cart/requestable-product.interface';
+//Egen kode - Slutt
 @Injectable()
 export class RequestHistoryService {
   public abortController = new AbortController();
 
-  constructor(private readonly qerClient: QerApiService, private readonly itshopRequest: ItshopRequestService) {}
+  constructor(
+    private readonly qerClient: QerApiService,
+    private readonly itshopRequest: ItshopRequestService,
+    private spMultipleprofitcentersService: SpMultipleprofitcentersService
+  ) {}
 
   public get PortalItshopRequestsSchema(): EntitySchema {
     return this.qerClient.typedClient.PortalItshopRequests.GetSchema();
@@ -193,11 +200,25 @@ export class RequestHistoryService {
       },
     });
 
-   // item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]);
+    // item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]); //kommentert bort, da det ikke fungerer å kopiere bestillinger hvor uid_profitcenter er satt.
+    //Egen kode - start
+    const requestable: RequestableProduct = {
+      Display: pwo.DisplayOrg.value,
+      DisplayRecipient: pwo.DisplayPersonOrdered.value,
+    };
+    const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(pwo.UID_PersonOrdered.value, requestable);
+
+    if (selectedProfitCenter == undefined) {
+      return;
+    }
+   // requestable.UidProfitCenter = selectedProfitCenter;
+    console.log('cart-items.service.ts: ' + selectedProfitCenter);
+
     item.UID_ITShopOrg.Column.PutValue(pwo.UID_Org.value);
     item.UID_PersonOrdered.Column.PutValue(pwo.UID_PersonOrdered.value);
-    item.UID_ProfitCenter.Column.PutValue("9a04e91c-740e-4005-978e-c19f2e598d9a");//(pwo.UID_ProfitCenter.value);
-    item.OrderReason.Column.PutValue("Dilldall");
+    item.UID_ProfitCenter.Column.PutValue(selectedProfitCenter); 
+    item.OrderReason.Column.PutValue('Dilldall');
+    //Egen kode - slutt
     await this.qerClient.typedClient.PortalCartitem.Post(item);
 
     return item;
