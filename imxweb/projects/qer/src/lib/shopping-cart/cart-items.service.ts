@@ -38,18 +38,11 @@ import { CartItemInteractiveService } from './cart-item-edit/cart-item-interacti
 import { RequestableProduct } from './requestable-product.interface';
 
 //Egen kode - start
-import { ProfitCenterObject } from '../new-request/new-request-content/new-request-content.component';
-import { SpMultipleprofitcentersDialogComponent } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component';
-import { TypedClient, V2Client } from 'imx-api-ccc';
-import { MatDialog } from '@angular/material/dialog';
+import { SpMultipleprofitcentersService } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters.service';
 //Egen kode - slutt
 
 @Injectable()
 export class CartItemsService {
- //Egen kode - start
-   v2Client: V2Client;
-   typedClient: TypedClient;
-   //Egen kode - slutt
   public get PortalCartitemSchema(): EntitySchema {
     return this.qerClient.typedClient.PortalCartitem.GetSchema();
   }
@@ -62,16 +55,10 @@ export class CartItemsService {
     private readonly parameterDataService: ParameterDataService,
     private readonly cartItemInteractive: CartItemInteractiveService,
     //Egen kode - start
-    private readonly appConfig: AppConfigService,
-    public dialog: MatDialog,
-    private readonly translationProvider: ImxTranslationProviderService,
+    private spMultipleprofitcentersService: SpMultipleprofitcentersService,
     //Egen kode - slutt
   ) {
-    //Egen kode - start
-    const schemaProvider = appConfig.client;
-    this.v2Client = new V2Client(appConfig.apiClient, schemaProvider);
-    this.typedClient = new TypedClient(this.v2Client, this.translationProvider);
-    //Egen kode - slutt
+
   }
 
   public async getItemsForCart(uidShoppingCart?: string): Promise<ExtendedTypedEntityCollection<PortalCartitem, CartItemDataRead>> {
@@ -128,25 +115,14 @@ export class CartItemsService {
 
       //Egen kode - start
 
-      let profitCenterList: ProfitCenterObject[] = [];
-      
-      await this.ProfitCenters(requestable.UidPerson, profitCenterList);
-      
-      const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
-        data: { 
-          profitCenters: profitCenterList,
-          DisplayProduct: requestable.Display,
-          DisplayPerson: requestable.DisplayRecipient
-         }
-      });
+      const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(requestable.UidPerson, requestable);
   
-      const result = await dialogRef.afterClosed().toPromise();
-      
-      if (result == "" || result == undefined) {
+      if (selectedProfitCenter == undefined) {
         return;
       }
-      requestable.UidProfitCenter = result;
-      console.log('cart-items.service.ts: ' + result);
+      requestable.UidProfitCenter = selectedProfitCenter;
+      console.log('cart-items.service.ts: ' + selectedProfitCenter);
+     
 //Egen kode - slutt
 
       const cartItemCollection = await this.createAndPost(requestable, parentCartUid);
@@ -308,25 +284,4 @@ export class CartItemsService {
 
     return result;
   }
-
-  //Egen kode - start
-  public async ProfitCenters(uidRecipient: string, profitCenterList: any[]): Promise<ProfitCenterObject> {
-    
-    const data = await this.typedClient.PortalGetemployments.Get(uidRecipient);//'1f4d133e-18b5-4baa-ac36-b2788263485a'); //this.v2Client.portal_GetEmployments_get('1f4d133e-18b5-4baa-ac36-b2788263485a');
-
-   if (data.totalCount > 1) {
-     console.log('User have more than one profitcenter');
-   }
- 
-   for(let item of data.Data){
-   
-   profitCenterList.push({
-      ShortName: item.GetEntity().GetColumn('ShortName').GetValue(),
-      AccountNumber: item.GetEntity().GetColumn('AccountNumber').GetValue(),
-      UID_Person: item.GetEntity().GetColumn('UID_Person').GetValue(),
-      UID_ProfitCenter: item.GetEntity().GetColumn('UID_ProfitCenter').GetValue()});
-  }
-    return;
-  }
-//Egen kode - slutt
 }
