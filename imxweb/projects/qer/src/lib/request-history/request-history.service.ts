@@ -217,7 +217,8 @@ export class RequestHistoryService {
     item.UID_ITShopOrg.Column.PutValue(pwo.UID_Org.value);
     item.UID_PersonOrdered.Column.PutValue(pwo.UID_PersonOrdered.value);
     item.UID_ProfitCenter.Column.PutValue(selectedProfitCenter); 
-    item.OrderReason.Column.PutValue('Dilldall');
+    item.OrderReason.Column.PutValue(pwo.OrderReason.value);
+    
     //Egen kode - slutt
     await this.qerClient.typedClient.PortalCartitem.Post(item);
 

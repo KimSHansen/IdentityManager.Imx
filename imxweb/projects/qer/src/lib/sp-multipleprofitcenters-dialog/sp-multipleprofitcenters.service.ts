@@ -30,6 +30,10 @@ export class SpMultipleprofitcentersService {
     
     await this.ProfitCenters(uidPerson, profitCenterList);
     
+    if (profitCenterList.length == 1) {
+      return profitCenterList[0].UID_ProfitCenter;
+     }
+
     const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
       data: { 
         profitCenters: profitCenterList,
