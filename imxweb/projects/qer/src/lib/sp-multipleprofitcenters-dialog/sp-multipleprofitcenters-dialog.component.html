@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{DisplayPerson}} - {{DisplayProduct}}</h2>
 <div mat-dialog-content>
     <mat-form-field>
-        <mat-label>Select profitcenter</mat-label>
+        <mat-label>{{'#LDS#Select profitcenter' | translate}}</mat-label> 
         <mat-select [(value)]="selectedProfitCenter" (selectionChange)="getProfitCenterID($event.value)" required>
             <mat-option *ngFor="let profitCenter of profitcenters" [value]="profitCenter.UID_ProfitCenter">
                 {{profitCenter.AccountNumber}}

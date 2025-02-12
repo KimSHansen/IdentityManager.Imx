@@ -154,6 +154,20 @@ export class RequestHistoryService {
   }
 
   public async prolongate(pwo: PortalItshopRequests, input: ProlongationInput): Promise<void> {
+    //Egen kode - start
+    const requestable: RequestableProduct = {
+      Display: pwo.DisplayOrg.value,
+      DisplayRecipient: pwo.DisplayPersonOrdered.value,
+    };
+    const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(pwo.UID_PersonOrdered.value, requestable);
+
+    if (selectedProfitCenter == undefined) {
+      return;
+    }
+    if (selectedProfitCenter.toUpperCase() != pwo.UID_ProfitCenter.value.toUpperCase()) {
+      const data = this.spMultipleprofitcentersService.updatePWOProfitCenter(this.getUidPwo(pwo), selectedProfitCenter);
+    }
+  //Egen kode - slutt
     return this.qerClient.client.portal_itshop_prolongate_post(this.getUidPwo(pwo), input);
   }
 
@@ -200,7 +214,9 @@ export class RequestHistoryService {
       },
     });
 
-    // item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]); //kommentert bort, da det ikke fungerer å kopiere bestillinger hvor uid_profitcenter er satt.
+    //item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]); //kommentert bort, da det ikke fungerer å kopiere bestillinger hvor uid_profitcenter er satt.
+    item.UID_PersonOrdered.Column.PutValue(pwo.UID_PersonOrdered.value);
+    
     //Egen kode - start
     const requestable: RequestableProduct = {
       Display: pwo.DisplayOrg.value,
@@ -215,7 +231,6 @@ export class RequestHistoryService {
     console.log('cart-items.service.ts: ' + selectedProfitCenter);
 
     item.UID_ITShopOrg.Column.PutValue(pwo.UID_Org.value);
-    item.UID_PersonOrdered.Column.PutValue(pwo.UID_PersonOrdered.value);
     item.UID_ProfitCenter.Column.PutValue(selectedProfitCenter); 
     item.OrderReason.Column.PutValue(pwo.OrderReason.value);
     

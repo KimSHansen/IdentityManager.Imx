@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfigService, ImxTranslationProviderService } from 'qbm';
 import { MatDialog } from '@angular/material/dialog';
-import { TypedClient, V2Client } from 'imx-api-ccc';
+import { PWOProfitCenterChangeReturnObject, PWOProfitCenterChangePostedObject, TypedClient, V2Client, V2ApiClientMethodFactory } from 'imx-api-ccc';
 import { SpMultipleprofitcentersDialogComponent } from './sp-multipleprofitcenters-dialog.component';
 import { SPProfitCenterObject } from './sp-profit-center-object';
 import { RequestableProduct } from  '../shopping-cart/requestable-product.interface';
@@ -51,10 +51,16 @@ export class SpMultipleprofitcentersService {
     return result;
   }
 
+  public async updatePWOProfitCenter(uidPersonWantsOrg: string, uidProfitCenter: string): Promise<PWOProfitCenterChangeReturnObject | undefined>{
+    let post: PWOProfitCenterChangePostedObject = {UID_PersonWantsOrg: uidPersonWantsOrg, UID_ProfitCenter: uidProfitCenter};
+ 
+    
+   const data = await this.v2Client.portal_spcustom_personwantsorg_profitcenterchange_post(post);
+    return data;
+  }
+
   private async ProfitCenters(uidPerson: string, profitCenterList: SPProfitCenterObject[]): Promise<void> {
-    // Fetch profit centers logic here
-    // Example:
-    const data = await this.typedClient.PortalGetemployments.Get(uidPerson);
+    const data = await this.typedClient.PortalSpcustomGetemployments.Get(uidPerson);
     for (let item of data.Data) {
       profitCenterList.push({
         ShortName: item.GetEntity().GetColumn('ShortName').GetValue(),

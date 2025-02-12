@@ -118,12 +118,12 @@ export class CartItemsService {
       const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(requestable.UidPerson, requestable);
   
       if (selectedProfitCenter == undefined) {
-        return;
+        return requestableServiceItemsForPersons.length - 1;
       }
       requestable.UidProfitCenter = selectedProfitCenter;
       console.log('cart-items.service.ts: ' + selectedProfitCenter);
      
-//Egen kode - slutt
+      //Egen kode - slutt
 
       const cartItemCollection = await this.createAndPost(requestable, parentCartUid);
 
