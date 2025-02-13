@@ -8,7 +8,7 @@
       <div class="snavigation-side">
         <div class="snavigation-side-toggle" *ngIf="showSidenavHeader">
           <h3 class="snavigation-side-toggle-header">{{ headerText }}</h3>
-          <button
+          <!-- <button
             *ngIf="dynamicDataSource?.dstSettings"
             [@fadeIcon]="searchState"
             data-imx-identifier="sidenav-tree-search-toggle"
@@ -19,7 +19,7 @@
             [matTooltip]="'#LDS#Search' | translate"
           >
             <eui-icon icon="search"></eui-icon>
-          </button>
+          </button> -->
           <imx-data-source-toolbar
             #dst
             *ngIf="dynamicDataSource?.dstSettings"
