@@ -64,7 +64,7 @@ export class SpMultipleprofitcentersService {
     for (let item of data.Data) {
       profitCenterList.push({
         ShortName: item.GetEntity().GetColumn('ShortName').GetValue(),
-        AccountNumber: item.GetEntity().GetColumn('AccountNumber').GetValue(),
+        Display: item.GetEntity().GetColumn('Display').GetValue(),
         UID_Person: item.GetEntity().GetColumn('UID_Person').GetValue(),
         UID_ProfitCenter: item.GetEntity().GetColumn('UID_ProfitCenter').GetValue()
       });
