@@ -116,3 +116,15 @@ imx-data-explorer-accounts {
   }
 }
 
+ //Egen kode - start
+  // bakgrunnsfarge på masthead
+   .eui-masthead, .eui-masthead .mat-toolbar.mat-primary {
+       background-color: #ffffff !important;
+   }
+   
+   //teksfarge på masthead
+   .imx-masthead-app-name, .imx-masthead-user-button, .imx-masthead--icon-button {
+       color: #444647 !important;
+   }
+ //Egen kode - slutt
+
