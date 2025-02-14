@@ -92,6 +92,16 @@ imx-data-explorer-accounts {
     .eui-sidesheet-actions.mat-card.eui-sidesheet-actions--white{
         background-color: $color-gray-70;
     }
+     //Egen kode - start
+  // bakgrunnsfarge på masthead
+   .eui-masthead, .eui-masthead .mat-toolbar.mat-primary {
+    background-color: $color-gray-60 !important;
+}
+   //teksfarge på masthead
+   .imx-masthead-app-name, .imx-masthead-user-button, .imx-masthead--icon-button {
+    color: #f9fbfc !important;
+}
+//Egen kode - slutt
 }
 
 .eui-contrast-theme {
