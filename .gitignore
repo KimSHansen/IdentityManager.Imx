@@ -1,0 +1,7 @@
+package-lock.json
+.vscode/launch.json
+imxweb/package-lock.json
+imxweb/package.json
+imxweb/projects/qer-app-portal/src/environments/environment.ts
+imxweb/.npmrc
+imxweb/.npmrc
