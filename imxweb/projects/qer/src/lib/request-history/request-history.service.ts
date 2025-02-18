@@ -165,7 +165,11 @@ export class RequestHistoryService {
       return;
     }
     if (selectedProfitCenter.toUpperCase() != pwo.UID_ProfitCenter.value.toUpperCase()) {
-      const data = this.spMultipleprofitcentersService.updatePWOProfitCenter(this.getUidPwo(pwo), selectedProfitCenter);
+      //var data = await this.spMultipleprofitcentersService.updatePWOProfitCenterAsync(pwo.UID_PersonOrdered.value, selectedProfitCenter);
+        var data = await this.spMultipleprofitcentersService.updatePWOProfitCenter(this.getUidPwo(pwo), selectedProfitCenter);
+      if (data.success === "false") {
+        return;
+      }
     }
   //Egen kode - slutt
     return this.qerClient.client.portal_itshop_prolongate_post(this.getUidPwo(pwo), input);

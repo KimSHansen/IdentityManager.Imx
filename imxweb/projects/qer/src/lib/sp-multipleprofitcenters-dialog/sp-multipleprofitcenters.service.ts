@@ -54,10 +54,16 @@ export class SpMultipleprofitcentersService {
   public async updatePWOProfitCenter(uidPersonWantsOrg: string, uidProfitCenter: string): Promise<PWOProfitCenterChangeReturnObject | undefined>{
     let post: PWOProfitCenterChangePostedObject = {UID_PersonWantsOrg: uidPersonWantsOrg, UID_ProfitCenter: uidProfitCenter};
  
-    
-   const data = await this.v2Client.portal_spcustom_personwantsorg_profitcenterchange_post(post);
+    const data = await this.v2Client.portal_spcustom_personwantsorg_profitcenterchange_post(post);
     return data;
   }
+
+  // public async updatePWOProfitCenterAsync(uidPersonWantsOrg: string, uidProfitCenter: string): Promise<PWOProfitCenterChangeReturnObject | undefined>{
+  //   let post: PWOProfitCenterChangePostedObject = {UID_PersonWantsOrg: uidPersonWantsOrg, UID_ProfitCenter: uidProfitCenter};
+ 
+  //   const data = await this.v2Client.portal_spcustom_personwantsorg_profitcenterchangeasync_post(post);
+  //   return data;
+  // }
 
   private async ProfitCenters(uidPerson: string, profitCenterList: SPProfitCenterObject[]): Promise<void> {
     const data = await this.typedClient.PortalSpcustomGetemployments.Get(uidPerson);
