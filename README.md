@@ -4,6 +4,12 @@
 
 ## Change log
 
+### February 20,2025
+- Fixes some package-vulnerabilities
+- 474749: Fixes an issue with showing the wrong sublevel when the same person can approve again in the same level
+- 476037: Fixes an issue with data time validation in the shopping cart. The error was thrown infinitely.
+- 479743: Fixes an issue with duplicated requests
+
 ### February 6, 2025
 - 474722: Fixes an issue with ignored filter settings after refreshing the history on an object.
 - 476117: Fixes an issue with updating the edit origin component when changing the condition type was changed.
