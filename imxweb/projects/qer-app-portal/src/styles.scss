@@ -95,12 +95,15 @@ imx-data-explorer-accounts {
      //Egen kode - start
   // bakgrunnsfarge på masthead
    .eui-masthead, .eui-masthead .mat-toolbar.mat-primary {
-    background-color: $color-gray-60 !important;
+    background-color: $color-gray-80 !important;
 }
    //teksfarge på masthead
    .imx-masthead-app-name, .imx-masthead-user-button, .imx-masthead--icon-button {
     color: #f9fbfc !important;
 }
+.custom-logo{ //For å gjøre logo negativ og gråskala i dark mode.
+    filter: invert(1) brightness(2) grayscale(100%);
+  }
 //Egen kode - slutt
 }
 
