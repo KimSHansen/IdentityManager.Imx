@@ -32,7 +32,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { PortalServicecategories } from 'imx-api-qer';
 import { IWriteValue, MultiValue } from 'imx-qbm-dbts';
 
-import { ImxTranslationProviderService, LdsReplacePipe, AppConfigService } from 'qbm';
+import { LdsReplacePipe } from 'qbm';
 import { NewRequestOrchestrationService } from '../new-request-orchestration.service';
 import { NewRequestPeerGroupComponent } from '../new-request-peer-group/new-request-peer-group.component';
 import { NewRequestProductComponent } from '../new-request-product/new-request-product.component';
@@ -46,7 +46,6 @@ import { SelectedProductItem } from '../new-request-selected-products/selected-p
 import { NewRequestSelectionService } from '../new-request-selection.service';
 import { NewRequestAddToCartService } from '../new-request-add-to-cart.service';
 import { ProjectConfigurationService } from '../../project-configuration/project-configuration.service';
-
 
 @Component({
   selector: 'imx-new-request-content',
@@ -62,9 +61,8 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   public showCatSlider = false;
   public selectedCategory: PortalServicecategories;
   public peerGroupEnabled = true;
-  
+
   constructor(
-    private readonly appConfig: AppConfigService,
     public readonly orchestration: NewRequestOrchestrationService,
     public readonly selectionService: NewRequestSelectionService,
     private readonly addToCartService: NewRequestAddToCartService,    
@@ -75,7 +73,7 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     private readonly translate: TranslateService,
   ) {
     
-      this.navLinks.push({
+    this.navLinks.push({
       id: 0,
       title: '#LDS#Heading All Products',
       component: NewRequestProductComponent,
@@ -114,7 +112,6 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     const projectConfig = await this.projectConfigService.getConfig();
     const canSelectFromTemplate = projectConfig.ITShopConfig.VI_ITShop_ProductSelectionFromTemplate;
     const canSelectByRefUser = projectConfig.ITShopConfig.VI_ITShop_ProductSelectionByReferenceUser;
-    
 
     if (canSelectByRefUser) {
       this.navLinks.push({
@@ -187,5 +184,5 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
 
   public async pushCandidatesToCart(): Promise<void> {
     this.addToCartService.addItemsToCart();
-  }  
+  }
 }
