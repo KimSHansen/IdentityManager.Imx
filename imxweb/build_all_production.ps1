@@ -1,7 +1,7 @@
 # Create a list of commands
 $commands = @(
-    "npm run build:lib qbm; tar -acf .\dist\Html_qbm.zip -C .\dist\qbm *",
-    "npm run build:lib qer; tar -acf .\dist\Html_qer.zip -C .\dist\qer *",
+    "npm run build:lib qbm;",# tar -acf .\dist\Html_qbm.zip -C .\dist\qbm *",
+    "npm run build:lib qer;",# tar -acf .\dist\Html_qer.zip -C .\dist\qer *",
     "npm run build:lib tsb; tar -acf .\dist\Html_tsb.zip -C .\dist\tsb *",
     "npm run build:lib att; tar -acf .\dist\Html_att.zip -C .\dist\att *",
     "npm run build:lib rms; tar -acf .\dist\Html_rms.zip -C .\dist\rms *",
@@ -19,7 +19,7 @@ $commands = @(
     "npm run build:lib apc; tar -acf .\dist\Html_apc.zip -C .\dist\apc *",
     "npm run build:lib sac; tar -acf .\dist\Html_sac.zip -C .\dist\sac *",
     "npm run build:app qer-app-portal; if (Test-Path -Path .\dist\qer-app-portal\HTML) { Remove-Item -Path .\dist\qer-app-portal\HTML -Recurse -Force }; tar -acf .\dist\Html_qer-app-portal.zip -C .\dist\qer-app-portal *",
-    "npm run build:app qbm-app-landingpage; if (Test-Path -Path .\dist\qbm-app-landingpage\HTML) { Remove-Item -Path .\dist\qbm-app-landingpage\HTML -Recurse -Force }; tar -acf .\dist\Html_qbm-app-landingpage.zip -C .\dist\qbm-app-landingpage *",
+    "npm run build:app qbm-app-landingpage; if (Test-Path -Path .\dist\qbm-app-landingpage\HTML) { Remove-Item -Path .\dist\qbm-app-landingpage\HTML -Recurse -Force }; tar -acf .\dist\Html_qbm-app-landingpage.zip -C .\dist\qbm-app-landingpage *"
     "npm run build:app qer-app-operationssupport; if (Test-Path -Path .\dist\qer-app-operationssupport\HTML) { Remove-Item -Path .\dist\qer-app-operationssupport\HTML -Recurse -Force }; tar -acf .\dist\Html_qer-app-operationssupport.zip -C .\dist\qer-app-operationssupport *",
     "npm run build:app qer-app-pwdportal; if (Test-Path -Path .\dist\qer-app-pwdportal\HTML) { Remove-Item -Path .\dist\qer-app-pwdportal\HTML -Recurse -Force }; tar -acf .\dist\Html_qer-app-pwdportal.zip -C .\dist\qer-app-pwdportal *"
 )

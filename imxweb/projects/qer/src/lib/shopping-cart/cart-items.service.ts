@@ -36,6 +36,7 @@ import { ParameterDataService } from '../parameter-data/parameter-data.service';
 import { ExtendedEntityWrapper } from '../parameter-data/extended-entity-wrapper.interface';
 import { CartItemInteractiveService } from './cart-item-edit/cart-item-interactive.service';
 import { RequestableProduct } from './requestable-product.interface';
+import { SPRequestableProduct } from '../sp-multipleprofitcenters-dialog/sp-requestable-product';
 
 //Egen kode - start
 import { SpMultipleprofitcentersService } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters.service';
@@ -84,13 +85,13 @@ export class CartItemsService {
   }
 
   public async createAndPost(
-    requestableServiceItemForPerson: RequestableProduct,
+    requestableServiceItemForPerson: SPRequestableProduct, //Endret fra RequestableProduct til utvidet interface, SPRequestableProduct, som inneholder uidProfitCenter
     parentCartUid: string
   ): Promise<ExtendedTypedEntityCollection<PortalCartitem, CartItemDataRead>> {
     const cartItem = this.qerClient.typedClient.PortalCartitem.createEntity();
     cartItem.UID_PersonOrdered.value = requestableServiceItemForPerson.UidPerson;
     cartItem.UID_ITShopOrg.value = requestableServiceItemForPerson.UidITShopOrg;
-    cartItem.UID_ProfitCenter.value = requestableServiceItemForPerson.UidProfitCenter; //'3dc0f51b-e587-40bf-8935-3b601e997b59';
+    cartItem.UID_ProfitCenter.value = requestableServiceItemForPerson.UidProfitCenter; 
     if (requestableServiceItemForPerson?.UidPatternItem?.length > 0) {
       cartItem.UID_PatternItem.value = requestableServiceItemForPerson.UidPatternItem;
     }
@@ -101,7 +102,7 @@ export class CartItemsService {
     return this.qerClient.typedClient.PortalCartitem.Post(cartItem);
   }
 
-  public async addItems(requestableServiceItemsForPersons: RequestableProduct[]): Promise<number> {
+  public async addItems(requestableServiceItemsForPersons: SPRequestableProduct[]): Promise<number> { //Endret fra RequestableProduct til utvidet interface, SPRequestableProduct, som inneholder uidProfitCenter
     const addedItems: PortalCartitem[] = [];
     const cartitemReferences: string[] = [];
     const cartItemsWithoutParams: PortalCartitem[] = [];

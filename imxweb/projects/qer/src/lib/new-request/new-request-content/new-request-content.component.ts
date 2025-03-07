@@ -30,7 +30,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 import { PortalServicecategories } from 'imx-api-qer';
-import { EntityCollectionData, EntityData, IWriteValue, MethodDescriptor, MultiValue } from 'imx-qbm-dbts';
+import { IWriteValue, MultiValue } from 'imx-qbm-dbts';
 
 import { ImxTranslationProviderService, LdsReplacePipe, AppConfigService } from 'qbm';
 import { NewRequestOrchestrationService } from '../new-request-orchestration.service';
@@ -46,8 +46,7 @@ import { SelectedProductItem } from '../new-request-selected-products/selected-p
 import { NewRequestSelectionService } from '../new-request-selection.service';
 import { NewRequestAddToCartService } from '../new-request-add-to-cart.service';
 import { ProjectConfigurationService } from '../../project-configuration/project-configuration.service';
-//import { MatDialog } from '@angular/material/dialog';
-//import { V2Client, TypedClient } from 'imx-api-ccc';
+
 
 @Component({
   selector: 'imx-new-request-content',
@@ -63,9 +62,7 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
   public showCatSlider = false;
   public selectedCategory: PortalServicecategories;
   public peerGroupEnabled = true;
-  //v2Client: V2Client;
-  //typedClient: TypedClient;
-
+  
   constructor(
     private readonly appConfig: AppConfigService,
     public readonly orchestration: NewRequestOrchestrationService,
@@ -76,15 +73,9 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly sidesheetService: EuiSidesheetService,
     private readonly translate: TranslateService,
-    //public dialog: MatDialog,
-    private readonly translationProvider: ImxTranslationProviderService,
   ) {
     
-    // const schemaProvider = appConfig.client;
-    // this.v2Client = new V2Client(appConfig.apiClient, schemaProvider);
-    // this.typedClient = new TypedClient(this.v2Client, this.translationProvider);
-
-    this.navLinks.push({
+      this.navLinks.push({
       id: 0,
       title: '#LDS#Heading All Products',
       component: NewRequestProductComponent,
@@ -194,75 +185,7 @@ export class NewRequestContentComponent implements OnInit, OnDestroy {
     this.selectionService.clearProducts();
   }
 
-  // public async pushCandidatesToCart(): Promise<void> {
-
-  //   const recipientsUids = MultiValue.FromString(this.orchestration.recipients.value).GetValues();
-  //   //let dialogRef //<SpMultipleprofitcentersDialogComponent, any>
-
-  //   for (const uidRecipient of recipientsUids) {
-  //     let profitCenterList = [];
-      
-  //     let a = this.ProfitCenters(uidRecipient, profitCenterList);
-      
-  //     const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
-  //     //width: '250px',
-  //     data: {profitCenters: profitCenterList}
-  //   });
-  
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if(result == "" || result == undefined){
-  //       return;
-  //     }
-  //   console.log('pushCandidatesToCart: ' + result);
-  //    // const id = result;
-  //   });
-  //   this.addToCartService.addItemsToCart();
-  // }
-  // }
-
   public async pushCandidatesToCart(): Promise<void> {
-    // const recipientsUids = MultiValue.FromString(this.orchestration.recipients.value).GetValues();
-    
-    // for (const uidRecipient of recipientsUids) {
-    //   let profitCenterList: ProfitCenterObject[] = [];
-      
-    //   await this.ProfitCenters(uidRecipient, profitCenterList);
-      
-    //   const dialogRef = this.dialog.open(SpMultipleprofitcentersDialogComponent, {
-    //     data: { profitCenters: profitCenterList }
-    //   });
-  
-    //   const result = await dialogRef.afterClosed().toPromise();
-      
-    //   if (result == "" || result == undefined) {
-    //     return;
-    //   }
-  
-    //   console.log('pushCandidatesToCart: ' + result);
-    // }
-  
     this.addToCartService.addItemsToCart();
-  }
-  
-
-  //  public async ProfitCenters(uidRecipient: string, profitCenterList: any[]): Promise<ProfitCenterObject> {
-  //    //const data = await this.v2Client.portal_Employments_get();
-  //    const data = await this.typedClient.PortalGetemployments.Get(uidRecipient);//'1f4d133e-18b5-4baa-ac36-b2788263485a'); //this.v2Client.portal_GetEmployments_get('1f4d133e-18b5-4baa-ac36-b2788263485a');
-  //    //this.profitCenterList.push(data);
-  //   //this.profitCenters.push(data[0].);
-  //   if (data.totalCount > 1) {
-  //     console.log('User have more than one profitcenter');
-  //   }
-  
-  //   for(let item of data.Data){
-    
-  //   profitCenterList.push({
-  //      ShortName: item.GetEntity().GetColumn('ShortName').GetValue(),
-  //      AccountNumber: item.GetEntity().GetColumn('AccountNumber').GetValue(),
-  //      UID_Person: item.GetEntity().GetColumn('UID_Person').GetValue(),
-  //      UID_ProfitCenter: item.GetEntity().GetColumn('UID_ProfitCenter').GetValue()});
-  //  }
-  //    return;
-  //  }
-  
-  }
+  }  
+}
