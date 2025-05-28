@@ -85,7 +85,8 @@ export class EditReportModule {
   constructor(
     private readonly menuService: MenuService,
   ) {
-    this.setupMenu();
+        //this.setupMenu(); //Egen kode -- Kommentert ut denne, slik at menyen for Setup->Reports ikke vises. 
+                            //NB! Route er fortsatt tilgjengelig, da fjerning av den gjør også at annen rapportfunksjonalitet da ville forsvunnet.
   }
 
   private setupMenu(): void {
