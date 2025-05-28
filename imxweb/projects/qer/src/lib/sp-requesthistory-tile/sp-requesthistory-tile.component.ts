@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ccc-sp-requesthistory-tile',
   templateUrl: './sp-requesthistory-tile.component.html',
-  styleUrls: ['./sp-requesthistory-tile.component.scss']
+  styleUrls: ['./sp-requesthistory-tile.component.scss'],
 })
 export class SpRequesthistoryTileComponent implements OnInit {
+  constructor(public readonly router: Router) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  public openRequestHistory(): void {
+    this.router.navigate(['requesthistory']);
   }
-
 }
