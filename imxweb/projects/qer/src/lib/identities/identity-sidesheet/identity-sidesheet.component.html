@@ -50,7 +50,8 @@
       </div>
     </ng-template>
   </mat-tab>
-  <mat-tab>
+   <!-- Egen kode - Start: kommentert ut modulen som viser Main Data -->
+  <!-- <mat-tab>
     <ng-template mat-tab-label>
       <span translate>#LDS#Heading Main Data</span>
     </ng-template>
@@ -90,7 +91,7 @@
                 [attr.data-imx-identifier]="'identity-sidesheet-toggle-for-column-' + data.selectedIdentity.IsSecurityIncident.Column.ColumnName"
               >
                 <span [translate]="incidentToggle.checked ? '#LDS#Identity poses a security risk' : '#LDS#Identity does not pose a security risk'"></span>
-              </mat-slide-toggle>
+              </mat-slide-toggle> 
             </div>
             <mat-accordion>
               <mat-expansion-panel [expanded]="true" *ngIf="cdrListPersonal.length > 0">
@@ -141,8 +142,10 @@
 
       </div>
     </ng-template>
-  </mat-tab>
-  <mat-tab>
+  </mat-tab> -->
+  <!-- Egen kode - Slutt: kommentert ut modulen som viser Main Data -->
+  <!-- Egen kode - Start: kommentert ut modulen som viser Memberships -->
+  <!-- <mat-tab>
     <ng-template mat-tab-label>
       <span translate>#LDS#Heading Memberships</span>
     </ng-template>
@@ -151,7 +154,8 @@
         <imx-assignments [parameters]="parameters"></imx-assignments>
       </div>
     </ng-template>
-  </mat-tab>
+  </mat-tab> -->
+  <!-- Egen kode - Slutt: kommentert ut modulen som viser Memberships -->
   <mat-tab *ngIf="!data.isAdmin">
     <ng-template mat-tab-label>
       <span translate>#LDS#Requests</span>
