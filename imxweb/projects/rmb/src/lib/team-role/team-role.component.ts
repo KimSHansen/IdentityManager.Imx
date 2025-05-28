@@ -64,10 +64,13 @@ export class TeamRoleComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    if(await this.permissionService.isPersonManager()){
-      this.showTeamRole = true;
-      await this.getTeamRole();
-    }
+    //Egen kode -- Kommentert ut denne nedenfor, slik at tile for Team Role på forsiden i ITShop ikke kommer opp.
+    // if(await this.permissionService.isPersonManager()){
+    //   this.showTeamRole = true;
+    //   await this.getTeamRole();
+    // }
+    this.showTeamRole = false; //Hardkoder denne til å være false for alle
+    //Egen kode -slutt
   }
 
   /**
