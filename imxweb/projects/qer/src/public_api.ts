@@ -206,3 +206,4 @@ export { ViewDevicesSidesheetComponent } from './lib/view-devices/view-devices-s
 export { AuthenticationFactors } from './lib/admin/authentication-factors.interface';
 export { SpMultipleprofitcentersDialogModule } from './lib/sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.module'
 export { SpMultipleprofitcentersDialogComponent } from './lib/sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component'
+export { SpRequesthistoryTileComponent } from './lib/sp-requesthistory-tile/sp-requesthistory-tile.component'
