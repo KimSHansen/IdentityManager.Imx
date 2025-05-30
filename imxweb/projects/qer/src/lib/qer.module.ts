@@ -56,6 +56,7 @@ import { TilesModule } from './tiles/tiles.module';
 import { UserModule } from './user/user.module';
 import { BusinessOwnerChartSummaryComponent } from './wport/businessowner-chartsummary/businessowner-chartsummary.component';
 import { StartComponent } from './wport/start/start.component';
+import { SpRequesthistoryTileComponent } from './sp-requesthistory-tile/sp-requesthistory-tile.component';
 
 export function initConfig(config: QerService): () => Promise<any> {
   return () =>
@@ -72,7 +73,8 @@ export function initConfig(config: QerService): () => Promise<any> {
   declarations: [
     BusinessOwnerChartSummaryComponent, 
     StartComponent, 
-    SettingsComponent,
+    SettingsComponent, 
+    SpRequesthistoryTileComponent,
   ],
   imports: [
     CommonModule,
@@ -106,6 +108,9 @@ export function initConfig(config: QerService): () => Promise<any> {
     },
     ServiceItemsService,
     PatternItemService,
+  ],
+  exports: [
+    SpRequesthistoryTileComponent
   ],
 })
 export class QerModule {
