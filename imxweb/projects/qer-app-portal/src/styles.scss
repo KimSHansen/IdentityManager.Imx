@@ -73,71 +73,129 @@ imx-data-explorer-accounts {
 }
 
 .eui-dark-theme {
-    .loading-progress{
+    .loading-progress {
         background-color: $color-gray-70;
     }
-    .mat-tab-group .mat-tab-header{
-        background-color:$color-gray-80;
+
+    .mat-tab-group .mat-tab-header {
+        background-color: $color-gray-80;
     }
-     .eui-sidesheet
-    {
-        background-color:$color-gray-80;
-        .mat-toolbar{
+
+    .eui-sidesheet {
+        background-color: $color-gray-80;
+
+        .mat-toolbar {
             background-color: $color-blue-80;
         }
-        .background--asher-gray{
+
+        .background--asher-gray {
             background-color: $color-gray-80;
         }
     }
-    .eui-sidesheet-actions.mat-card.eui-sidesheet-actions--white{
+
+    .eui-sidesheet-actions.mat-card.eui-sidesheet-actions--white {
         background-color: $color-gray-70;
     }
-     //Egen kode - start
-  // bakgrunnsfarge på masthead
-   .eui-masthead, .eui-masthead .mat-toolbar.mat-primary {
-    background-color: $color-gray-80 !important;
-}
-   //teksfarge på masthead
-   .imx-masthead-app-name, .imx-masthead-user-button, .imx-masthead--icon-button {
-    color: #f9fbfc !important;
-}
-.custom-logo{ //For å gjøre logo negativ og gråskala i dark mode.
-    filter: invert(1) brightness(2) grayscale(100%);
-  }
-//Egen kode - slutt
+
+    //Egen kode - start
+    // bakgrunnsfarge på masthead
+    .eui-masthead,
+    .eui-masthead .mat-toolbar.mat-primary {
+        background-color: $color-gray-80 !important;
+    }
+
+    //teksfarge på masthead
+    .imx-masthead-app-name,
+    .imx-masthead-user-button,
+    .imx-masthead--icon-button {
+        color: #f9fbfc !important;
+    }
+
+    .custom-logo {
+        //For å gjøre logo negativ og gråskala i dark mode.
+        filter: invert(1) brightness(2) grayscale(100%);
+    }
+
+    //teksfarge på tiles samt undertidler
+    .imx-subtext,
+    div[subtitle],
+    .imx-product-detail,
+    .mat-card-subtitle,
+    .imx-generic-tile-caption h4,
+    .imx-generic-tile-caption h3> :last-child,
+    .mat-tab-label-content,
+    .imx-tile-content {
+        color: rgb(255, 255, 255) !important;
+    }
+
+    //Egen kode - slutt
 }
 
 .eui-contrast-theme {
-  .loading-progress{
-      background-color: $color-gray-90;
-  }
-  .mat-tab-group .mat-tab-header{
-      background-color:$color-gray-100;
-  }
-   .eui-sidesheet
-  {
-      background-color:$color-gray-100;
-      .mat-toolbar{
-          background-color: $color-blue-90;
-      }
-      .background--asher-gray{
-          background-color: $color-gray-90;
-      }
-  }
-  .eui-sidesheet-actions.mat-card.eui-sidesheet-actions--white{
-      background-color: $color-gray-90;
-  }
-}
+    .loading-progress {
+        background-color: $color-gray-90;
+    }
 
+    .mat-tab-group .mat-tab-header {
+        background-color: $color-gray-100;
+    }
+
+    .eui-sidesheet {
+        background-color: $color-gray-100;
+
+        .mat-toolbar {
+            background-color: $color-blue-90;
+        }
+
+        .background--asher-gray {
+            background-color: $color-gray-90;
+        }
+    }
+
+    .eui-sidesheet-actions.mat-card.eui-sidesheet-actions--white {
+        background-color: $color-gray-90;
+    }
+
+    //Egen kode - start
+    //teksfarge på tiles samt undertidler
+    .imx-subtext,
+    div[subtitle],
+    .imx-product-detail,
+    .mat-card-subtitle,
+    .imx-generic-tile-caption h4,
+    .imx-generic-tile-caption h3> :last-child,
+    .mat-tab-label-content,
+    .imx-tile-content {
+        color: rgb(255, 255, 255) !important;
+    }
+
+    //Egen kode - slutt
+}
  //Egen kode - start
-  // bakgrunnsfarge på masthead
-   .eui-masthead, .eui-masthead .mat-toolbar.mat-primary {
-       background-color: #ffffff !important;
-   }
-   
-   //teksfarge på masthead
-   .imx-masthead-app-name, .imx-masthead-user-button, .imx-masthead--icon-button {
-       color: #444647 !important;
-   }
+ // bakgrunnsfarge på masthead
+ .eui-masthead,
+ .eui-masthead .mat-toolbar.mat-primary {
+     background-color: #ffffff !important;
+ }
+
+ //teksfarge på masthead
+ .imx-masthead-app-name,
+ .imx-masthead-user-button,
+ .imx-masthead--icon-button {
+     color: #444647 !important;
+ }
+
+ //teksfarge på tiles samt undertidler
+ .imx-subtext,
+ div[subtitle],
+ .imx-product-detail,
+ .mat-card-subtitle,
+ .imx-generic-tile-caption h4,
+ .imx-generic-tile-caption h3> :last-child,
+ .mat-tab-label-content,
+ .imx-tile-content {
+     color: rgb(0, 0, 0) !important;
+ }
+
  //Egen kode - slutt
 
