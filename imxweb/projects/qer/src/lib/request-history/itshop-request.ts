@@ -114,7 +114,7 @@ export class ItshopRequest extends PortalItshopRequests implements RequestParame
       this.propertyInfo.push(new BaseReadonlyCdr(this.IsCrossFunctional.Column));
     }
 
-    const document = new BaseReadonlyCdr(this.DocumentNumber.Column, '#LDS#Request number');
-    this.propertyInfo.splice(3, 0, document);
+    /*const document = new BaseReadonlyCdr(this.DocumentNumber.Column, '#LDS#Request number');
+    // this.propertyInfo.splice(3, 0, document);*/
   }
 }
