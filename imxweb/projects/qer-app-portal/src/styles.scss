@@ -197,5 +197,10 @@ imx-data-explorer-accounts {
      color: rgb(0, 0, 0) !important;
  }
 
+ //for å kunne få med hele produktnavnet
+ .imx-card-container imx-data-table .imx-request-col-display
+{
+    max-width: none !important;
+}
  //Egen kode - slutt
 
