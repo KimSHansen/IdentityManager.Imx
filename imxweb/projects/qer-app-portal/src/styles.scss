@@ -198,9 +198,13 @@ imx-data-explorer-accounts {
  }
 
  //for å kunne få med hele produktnavnet
+//02.02.2026: Lagt til word wrap istf. at kolonnebredden blir automatisk utvidet.
  .imx-card-container imx-data-table .imx-request-col-display
 {
-    max-width: none !important;
+    //max-width: none !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere;
 }
  //Egen kode - slutt
 
