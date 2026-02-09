@@ -203,12 +203,16 @@
     <button mat-menu-item *ngIf="canAnalyzeRisk" (click)="analyzeRisk()" data-imx-identifier="identity-sidesheet-button-analyze-risk">
       <span translate>#LDS#Analyze risk</span>
     </button>
-    <button mat-menu-item *ngIf="canGeneratePasscode" (click)="generatePasscode()" data-imx-identifier="identity-sidesheet-button-create-passcode">
+    <!-- Egen kode - Start: kommentert ut menyvalget for å kunne generere passcode -->
+    <!-- <button mat-menu-item *ngIf="canGeneratePasscode" (click)="generatePasscode()" data-imx-identifier="identity-sidesheet-button-create-passcode">
       <span translate>#LDS#Create passcode</span>
-    </button>
-    <button mat-menu-item *ngIf="data?.isAdmin === false && data.canEdit" (click)="onAssignManager()" data-imx-identifier="identity-sidesheet-assign-manager">
+    </button> -->
+    <!-- Egen kode - Slutt -->
+    <!-- Egen kode - Start: kommentert ut menyvalget for å kunne endre en ansattes leder -->
+    <!-- <button mat-menu-item *ngIf="data?.isAdmin === false && data.canEdit" (click)="onAssignManager()" data-imx-identifier="identity-sidesheet-assign-manager">
       <span translate>#LDS#Assign to new manager</span>
-    </button>
+    </button> -->
+    <!-- Egen kode - Slutt -->
   </mat-menu>
   <button
     *ngIf="data.canEdit"
