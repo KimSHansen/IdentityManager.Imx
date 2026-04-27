@@ -176,9 +176,7 @@ export class BusinessOwnerChartSummaryComponent implements OnInit {
   private async loadIndirectOrDirectReports(): Promise<void> {
     if (await this.qerPermissions.isPersonManager()) {
       this.allReportsCount = (await this.qerClient.typedClient.PortalPersonReports.Get({
-        PageSize: -1,
-        OnlyDirect: true, //Lagt til for kun å få ansatte direkte under leder. For å få opp hastigheten på API-kallet.
-        isinactive: '0' //Lagt til for kun å laste aktive ansatte. Men vi bruker isTemporaryInactive, så denne har ikke så mye å si i praksis.
+        PageSize: -1
       })).totalCount;
     }
   }
