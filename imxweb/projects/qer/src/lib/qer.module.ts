@@ -65,6 +65,7 @@ import { TilesModule } from './tiles/tiles.module';
 import { UserModule } from './user/user.module';
 import { BusinessOwnerChartSummaryComponent } from './wport/businessowner-chartsummary/businessowner-chartsummary.component';
 import { StartComponent } from './wport/start/start.component';
+import { SpRequesthistoryTileComponent } from './sp-requesthistory-tile/sp-requesthistory-tile.component';
 
 const routes: Routes = [
   {
@@ -77,7 +78,7 @@ const routes: Routes = [
 
 // @dynamic
 @NgModule({
-  declarations: [StartComponent, BusinessOwnerChartSummaryComponent, SettingsComponent],
+  declarations: [StartComponent, BusinessOwnerChartSummaryComponent, SettingsComponent, SpRequesthistoryTileComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
@@ -105,6 +106,9 @@ const routes: Routes = [
     DataViewModule,
     QueueStatusComponent,
     StatisticsModule,
+  ],
+   exports: [
+    SpRequesthistoryTileComponent,
   ],
   providers: [
     provideAppInitializer(() => inject(QerService).init()),

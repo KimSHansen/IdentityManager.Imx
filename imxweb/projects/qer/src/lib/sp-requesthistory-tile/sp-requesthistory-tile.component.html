@@ -1,0 +1,9 @@
+<imx-icon-tile [caption]="'#LDS#Request history' | translate"
+   [subtitle]="'#LDS#View request history' | translate">
+   <ng-template #ActionTemplate>
+       <button mat-button color="primary" type="button" (click)="openRequestHistory()">
+           <span>{{'#LDS#Explore' | translate}}</span>
+           <eui-icon size="m" icon="forward"></eui-icon>
+       </button>
+   </ng-template>
+</imx-icon-tile>

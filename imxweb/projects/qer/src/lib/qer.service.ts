@@ -32,6 +32,7 @@ import { ProductDependencyCheckComponent } from './shopping-cart-validation-deta
 import { ShoppingCartValidationDetailService } from './shopping-cart-validation-detail/shopping-cart-validation-detail.service';
 import { ClassloggerService, ExtService } from 'qbm';
 import { QueueStatusComponent } from './queue/queue-status/queue-status.component';
+import { SpRequesthistoryTileComponent } from './sp-requesthistory-tile/sp-requesthistory-tile.component';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +48,7 @@ export class QerService {
     this.validationDetailService.register(ExclusionCheckComponent, 'ExclusionCheck');
     this.validationDetailService.register(DuplicateCheckComponent, 'DuplicateCheck');
     this.validationDetailService.register(ProductDependencyCheckComponent, 'ProductDependencyCheck');
+    this.extService.register("Dashboard-MediumTiles",{instance: SpRequesthistoryTileComponent})
     this.logger.info(this, '▶️ QueueStatusComponent loaded');
     this.extService.register('queueMastButton', {
       instance: QueueStatusComponent,

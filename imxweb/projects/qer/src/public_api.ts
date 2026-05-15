@@ -204,3 +204,4 @@ export { ViewDevicesSidesheetComponent } from './lib/view-devices/view-devices-s
 export { ViewDevicesModule } from './lib/view-devices/view-devices.module';
 export { DashboardService } from './lib/wport/start/dashboard.service';
 export { StartComponent } from './lib/wport/start/start.component';
+export { SpRequesthistoryTileComponent } from './lib/sp-requesthistory-tile/sp-requesthistory-tile.component';
