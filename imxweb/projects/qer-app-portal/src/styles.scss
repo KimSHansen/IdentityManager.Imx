@@ -75,6 +75,38 @@ imx-data-explorer-accounts {
   .eui-sidesheet-actions.mat-mdc-card.eui-sidesheet-actions--white {
     background-color: eui.$color-gray-70;
   }
+    //Egen kode - start
+    // bakgrunnsfarge på masthead
+    .eui-masthead,
+    .eui-masthead .mat-toolbar.mat-primary {
+        background-color: eui.$color-gray-80 !important;
+    }
+
+    //teksfarge på masthead
+    .imx-masthead-app-name,
+    .imx-masthead-user-button,
+    .imx-masthead--icon-button {
+        color: #f9fbfc !important;
+    }
+
+    .custom-logo {
+        //For å gjøre logo negativ og gråskala i dark mode.
+        filter: invert(1) brightness(2) grayscale(100%);
+    }
+
+    //teksfarge på tiles samt undertidler
+    .imx-subtext,
+    div[subtitle],
+    .imx-product-detail,
+    .mat-card-subtitle,
+    .mat-mdc-card-subtitle,
+    .imx-generic-tile-caption h4,
+    .imx-generic-tile-caption h3> :last-child,
+    .mat-tab-label-content,
+    .imx-tile-content {
+        color: rgb(255, 255, 255) !important;
+    }
+    //Egen kode - slutt
 }
 
 .eui-contrast-theme {
@@ -91,4 +123,47 @@ imx-data-explorer-accounts {
   .eui-sidesheet-actions.mat-mdc-card.eui-sidesheet-actions--white {
     background-color: eui.$color-gray-90;
   }
+    //Egen kode - start
+    //teksfarge på tiles samt undertidler
+    .imx-subtext,
+    div[subtitle],
+    .imx-product-detail,
+    .mat-card-subtitle,
+    .mat-mdc-card-subtitle,
+    .imx-generic-tile-caption h4,
+    .imx-generic-tile-caption h3> :last-child,
+    .mat-tab-label-content,
+    .imx-tile-content {
+        color: rgb(255, 255, 255) !important;
+    }
+    //Egen kode - slutt
 }
+//Egen kode - start
+ // bakgrunnsfarge på masthead
+ .eui-masthead,
+ .eui-masthead .mat-toolbar.mat-primary {
+     background-color: #ffffff !important;
+ }
+
+ //teksfarge på masthead
+ .imx-masthead-app-name,
+ .imx-masthead-user-button,
+ .imx-masthead--icon-button {
+     color: #444647 !important;
+ }
+
+ //teksfarge på tiles samt undertitler
+ .imx-subtext,
+ div[subtitle],
+ .imx-product-detail,
+ .mat-card-subtitle,
+ .mat-mdc-card-subtitle,
+ .imx-generic-tile-caption h4,
+ .imx-generic-tile-caption h3> :last-child,
+ .mat-tab-label-content,
+ .imx-tile-content {
+     color: rgb(33, 33, 33) !important;
+     font-weight: normal !important;
+ }
+//Egen kode - slutt
+
