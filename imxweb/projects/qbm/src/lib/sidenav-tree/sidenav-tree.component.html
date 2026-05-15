@@ -9,6 +9,7 @@
         @if (showSidenavHeader) {
           <div class="imx-snavigation-side-toggle">
             <h3 class="imx-snavigation-side-toggle-header">{{ headerText }}</h3>
+            <!-- Egendefinert kode (kommentert bort søkeknapp på trevisning for service categories): Start
             @if (dynamicDataSource?.dstSettings && sideNavExpanded) {
               <button
                 [@fadeIcon]="searchState"
@@ -19,21 +20,22 @@
                 [matTooltip]="'#LDS#Search' | translate"
                 >
                 <eui-icon icon="search"></eui-icon>
-              </button>
+              </button> 
             }
             @if (dynamicDataSource?.dstSettings) {
               <imx-data-source-toolbar
-                #dst
-                [@expandSearch]="{ value: searchState, params: { expandWidth: expandWidth } }"
-                [alwaysVisible]="true"
-                [settings]="dynamicDataSource.dstSettings"
-                [options]="['search', 'filter']"
-                [searchBoxText]="'#LDS#Search' | translate"
-                [useThemedStyle]="true"
-                (search)="onSearch($event)"
-                (navigationStateChanged)="onSearch($event.search ?? '')"
+              #dst
+              [@expandSearch]="{ value: searchState, params: { expandWidth: expandWidth } }"
+              [alwaysVisible]="true"
+              [settings]="dynamicDataSource.dstSettings"
+              [options]="['search', 'filter']"
+              [searchBoxText]="'#LDS#Search' | translate"
+              [useThemedStyle]="true"
+              (search)="onSearch($event)"
+              (navigationStateChanged)="onSearch($event.search ?? '')"
               ></imx-data-source-toolbar>
             }
+            Egendefinert kode: Slutt-->
             @if (sideNavExpanded) {
               <button
                 data-imx-identifier="sidenav-tree-collapse-all-toggle"
