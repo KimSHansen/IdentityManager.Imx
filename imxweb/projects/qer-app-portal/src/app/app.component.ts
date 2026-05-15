@@ -25,7 +25,7 @@
  */
 import { Component, ErrorHandler, OnDestroy, OnInit } from '@angular/core';
 import { Event, EventType, NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, firstValueFrom } from 'rxjs';
 
 import {
   AppConfigService,
@@ -36,6 +36,7 @@ import {
   ImxTranslationProviderService,
   ISessionState,
   MenuService,
+  RelatedApplication,
   Message,
   SplashService,
   SystemInfoService,
@@ -45,10 +46,11 @@ import {
 import { ProjectConfigurationService, QerApiService, SettingsComponent, UserModelService } from 'qer';
 
 import { MatDialog } from '@angular/material/dialog';
-import { EuiTheme, EuiThemeService, EuiTopNavigationItem } from '@elemental-ui/core';
+import { EuiTheme, EuiThemeService, EuiTopNavigationItem, EuiTopNavigationItemType } from '@elemental-ui/core';
 import { ProjectConfig } from '@imx-modules/imx-api-qbm';
 import { ProfileSettings, QerProjectConfig } from '@imx-modules/imx-api-qer';
 import { getBaseHref, HEADLESS_BASEHREF } from './app.module';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'imx-root',
@@ -84,6 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly confirmationService: ConfirmationService,
     private readonly userMessageService: UserMessageService,
     private readonly appConfigService: AppConfigService,
+    private readonly translateService: TranslateService,
   ) {
     this.subscriptions.push(
       this.authentication.onSessionResponse.subscribe(async (sessionState: ISessionState) => {
@@ -126,6 +129,31 @@ export class AppComponent implements OnInit, OnDestroy {
 
           await this.applyProfileSettings();
           this.menuItems = await menuService.getMenuItems(systemInfo.PreProps ?? [], features, true, config, groups);
+
+          // Egen kode start: 
+          //Get related applications from api
+          const relatedApplications = await this.qerClient.client.portal_relatedapplications_get();
+          // Recursively convert related application structure to EuiMenuItem structure
+          const mapApplicationToMenuItem = (app: RelatedApplication): EuiTopNavigationItem => ({
+            type: app.ChildApps?.length ? EuiTopNavigationItemType.Menu : EuiTopNavigationItemType.ExternalLink,
+            text: app.Display,
+            url: app.Url,
+            items: app.ChildApps?.map(mapApplicationToMenuItem),
+          });
+          // // Add a new menu item containing the apps as child items
+
+
+          if (relatedApplications.length > 0) {
+            this.menuItems.push({
+              type: EuiTopNavigationItemType.Menu,
+              text: await firstValueFrom(
+                this.translateService.get('#LDS#Heading Other Web Applications')
+              ),
+              items: relatedApplications.map(mapApplicationToMenuItem),
+            });
+          }
+          // Egen kode slutt:
+
           // Close the splash screen that opened in app service initialisation
           // Needs to close here when running in containers (auth skipped)
           splash.close();
