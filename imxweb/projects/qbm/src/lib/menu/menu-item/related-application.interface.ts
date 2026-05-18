@@ -31,7 +31,4 @@ export interface RelatedApplication {
   displayName: string;
   description: string;
   uidParent: string;
-  ChildApps: any;
-  Display: any;
-  Url: any;
 }

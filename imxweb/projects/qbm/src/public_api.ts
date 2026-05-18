@@ -222,6 +222,9 @@ export { MenuFactory, MenuItem } from './lib/menu/menu-item/menu-item.interface'
 export { NavigationCommandsMenuItem } from './lib/menu/menu-item/navigation-commands-menu-item.interface';
 export { RelatedApplicationMenuItem } from './lib/menu/menu-item/related-application-menu-item';
 export { RelatedApplication } from './lib/menu/menu-item/related-application.interface';
+//Egen kode Start:
+export { SPCustomRelatedApplication } from './lib/menu/menu-item/spcustom-related-application.interface';
+//Egen kode Slutt
 export { MenuService } from './lib/menu/menu.service';
 export { ConfirmationInputComponent } from './lib/message-dialog/confirmation-input.component';
 export { MessageDialogResult } from './lib/message-dialog/message-dialog-result.enum';

@@ -36,7 +36,7 @@ import {
   ImxTranslationProviderService,
   ISessionState,
   MenuService,
-  RelatedApplication,
+  SPCustomRelatedApplication,
   Message,
   SplashService,
   SystemInfoService,
@@ -134,15 +134,13 @@ export class AppComponent implements OnInit, OnDestroy {
           //Get related applications from api
           const relatedApplications = await this.qerClient.client.portal_relatedapplications_get();
           // Recursively convert related application structure to EuiMenuItem structure
-          const mapApplicationToMenuItem = (app: RelatedApplication): EuiTopNavigationItem => ({
+          const mapApplicationToMenuItem = (app: SPCustomRelatedApplication): EuiTopNavigationItem => ({
             type: app.ChildApps?.length ? EuiTopNavigationItemType.Menu : EuiTopNavigationItemType.ExternalLink,
             text: app.Display,
             url: app.Url,
             items: app.ChildApps?.map(mapApplicationToMenuItem),
           });
-          // // Add a new menu item containing the apps as child items
-
-
+          // Add a new menu item containing the apps as child items
           if (relatedApplications.length > 0) {
             this.menuItems.push({
               type: EuiTopNavigationItemType.Menu,
