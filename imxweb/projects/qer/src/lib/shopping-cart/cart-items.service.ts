@@ -45,6 +45,10 @@ import { CartItemInteractiveService } from './cart-item-edit/cart-item-interacti
 import { CartItemsExtensionService } from './cart-items-extension.service';
 import { CartItemsCounter, ICartItemsExtensionService } from './cart-items.model';
 import { RequestableProduct } from './requestable-product.interface';
+//Egen kode - start
+import { SPRequestableProduct } from '../sp-multipleprofitcenters-dialog/sp-requestable-product';
+import { SpMultipleprofitcentersService } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters.service';
+//Egen kode - slutt
 
 @Injectable()
 export class CartItemsService {
@@ -63,6 +67,9 @@ export class CartItemsService {
     private readonly itemEditService: ItemEditService,
     private readonly parameterDataService: ParameterDataService,
     private readonly cartItemInteractive: CartItemInteractiveService,
+    //Egen kode - start
+    private spMultipleprofitcentersService: SpMultipleprofitcentersService,
+    //Egen kode - slutt
   ) {
     const extService = cartItemsExtensionService.get('AccessRequestService');
     if (extService) {
@@ -93,13 +100,16 @@ export class CartItemsService {
   }
 
   public async createAndPost(
-    requestableServiceItemForPerson: RequestableProduct,
+    requestableServiceItemForPerson: SPRequestableProduct,
     parentCartUid: string | undefined,
   ): Promise<ExtendedTypedEntityCollection<PortalCartitem, CartItemDataRead>> {
     const cartItem = this.qerClient.typedClient.PortalCartitem.createEntity();
     if (cartItem != null) {
       cartItem.UID_PersonOrdered.value = requestableServiceItemForPerson.UidPerson || '';
       cartItem.UID_ITShopOrg.value = requestableServiceItemForPerson.UidITShopOrg || '';
+      //Egen kode - start
+      cartItem.UID_ProfitCenter.value = requestableServiceItemForPerson.UidProfitCenter || '';
+      //Egen kode - slutt
     }
     if (!!requestableServiceItemForPerson?.UidPatternItem?.length) {
       cartItem.UID_PatternItem.value = requestableServiceItemForPerson.UidPatternItem;
@@ -118,12 +128,12 @@ export class CartItemsService {
     return portalCartItem;
   }
 
-  public async addItems(requestableServiceItemsForPersons: RequestableProduct[]): Promise<CartItemsCounter> {
+  public async addItems(requestableServiceItemsForPersons: SPRequestableProduct[]): Promise<CartItemsCounter> {
     const addedItems: PortalCartitem[] = [];
     const cartitemReferences: string[] = [];
     const cartItemsWithoutParams: PortalCartitem[] = [];
 
-    let requestableProducts: RequestableProduct[] = [];
+    let requestableProducts: SPRequestableProduct[] = [];
     if (this.cartItemsExtensionService) {
       requestableProducts = await this.cartItemsExtensionService.OnBeforeCreateCartItems(requestableServiceItemsForPersons);
     } else {
@@ -159,6 +169,22 @@ export class CartItemsService {
           parentCartUid = await this.getFromExistingCartItems(addedItems[0]?.UID_ShoppingCartOrder.value, requestable);
         }
       }
+      //Egen kode - start
+  
+      const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(requestable.UidPerson!, requestable);
+  
+      if (!selectedProfitCenter) {
+        return cartitemReferences.length > 0
+          ? await this.editItems(cartitemReferences, cartItemsWithoutParams)
+          : {
+              possibleItems: Math.max(0,requestableProducts.length - 1),
+              savedItems: Math.max(0,addedItems.length - 1),
+            };
+      }
+      requestable.UidProfitCenter = selectedProfitCenter;
+      console.log('cart-items.service.ts: ' + selectedProfitCenter);
+    
+      //Egen kode - slutt
 
       const { data: cartItemCollection, error } = await tryCatch(this.createAndPost(requestable, parentCartUid));
 

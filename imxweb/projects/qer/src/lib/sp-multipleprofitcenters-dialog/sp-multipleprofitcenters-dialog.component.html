@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{DisplayPerson}} - {{DisplayProduct}}</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{'#LDS#Select profitcenter' | translate}}</mat-label>
+    <mat-select placeholder="{{'#LDS#Select profitcenter' | translate}}" [(value)]="selectedProfitCenter" (selectionChange)="getProfitCenterID($event.value)" required>
+      @for(profitCenter of profitcenters; track profitCenter.UID_ProfitCenter){
+      <mat-option [value]="profitCenter.UID_ProfitCenter">
+        {{profitCenter.Display}}
+      </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <mat-dialog-actions>
+    <button mat-stroked-button mat-dialog-close color="primary">
+      {{ '#LDS#Cancel' | translate }}
+    </button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="closeDialog()">
+      {{ '#LDS#OK' | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

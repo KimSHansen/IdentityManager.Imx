@@ -204,4 +204,6 @@ export { ViewDevicesSidesheetComponent } from './lib/view-devices/view-devices-s
 export { ViewDevicesModule } from './lib/view-devices/view-devices.module';
 export { DashboardService } from './lib/wport/start/dashboard.service';
 export { StartComponent } from './lib/wport/start/start.component';
+export { SpMultipleprofitcentersDialogModule } from './lib/sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.module'
+export { SpMultipleprofitcentersDialogComponent } from './lib/sp-multipleprofitcenters-dialog/sp-multipleprofitcenters-dialog.component'
 export { SpRequesthistoryTileComponent } from './lib/sp-requesthistory-tile/sp-requesthistory-tile.component';
