@@ -4,7 +4,7 @@ This document outlines all customizations made to the IdentityManager.Imx v92 br
 
 ## Overview
 
-This fork contains hospital/healthcare-specific customizations (Sykehuspartner - Norwegian healthcare context) with emphasis on profit center management and streamlined UI for operational needs.
+This fork contains hospital/healthcare-specific customizations (Norwegian healthcare context) with emphasis on profit center management and streamlined UI for operational needs.
 
 ---
 
@@ -71,7 +71,7 @@ PowerShell scripts to automate building multiple modules in sequence:
 ### 6. Logo Asset (NEW)
 **Location:** `imxweb/shared/assets/logo-sykehuspartner.svg`
 
-Added custom logo for Sykehuspartner (Norwegian healthcare organization) with light blue (#6cace4) and dark blue (#003087) branding.
+Added custom logo  (Norwegian healthcare organization) with light blue (#6cace4) and dark blue (#003087) branding.
 
 ### 7. Comprehensive Style Customizations (MODIFIED)
 **Location:** `imxweb/projects/qer-app-portal/src/styles.scss`
