@@ -50,12 +50,17 @@ import { ItshopRequestData } from '../itshop/request-info/itshop-request-data';
 import { QerApiService } from '../qer-api-client.service';
 import { ItshopRequest } from './itshop-request';
 import { ArchivedRequestHistoryLoadParameters, RequestHistoryLoadParameters } from './request-history-load-parameters.interface';
+//Egen kode - start
+import { SpMultipleprofitcentersService } from '../sp-multipleprofitcenters-dialog/sp-multipleprofitcenters.service';
+import { RequestableProduct } from '../shopping-cart/requestable-product.interface';
+//Egen kode - Slutt
 
 @Injectable()
 export class RequestHistoryService {
   constructor(
     private readonly qerClient: QerApiService,
     private readonly itshopRequest: ItshopRequestService,
+    private spMultipleprofitcentersService: SpMultipleprofitcentersService,
   ) {}
 
   public get PortalItshopRequestsSchema(): EntitySchema {
@@ -161,6 +166,23 @@ export class RequestHistoryService {
   }
 
   public async prolongate(pwo: PortalItshopRequests, input: ProlongationInput): Promise<void> {
+    //Egen kode - start
+    const requestable: RequestableProduct = {
+      Display: pwo.DisplayOrg.value,
+      DisplayRecipient: pwo.DisplayPersonOrdered.value,
+    };
+    const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(pwo.UID_PersonOrdered.value, requestable);
+    if (selectedProfitCenter == undefined) {
+      return;
+    }
+    if (selectedProfitCenter.toUpperCase() != pwo.UID_ProfitCenter.value.toUpperCase()) {
+      //var data = await this.spMultipleprofitcentersService.updatePWOProfitCenterAsync(pwo.UID_PersonOrdered.value, selectedProfitCenter);
+      var data = await this.spMultipleprofitcentersService.updatePWOProfitCenter(this.getUidPwo(pwo), selectedProfitCenter);
+      if (data?.success === 'false') {
+        return;
+      }
+    }
+    //Egen kode - slutt
     return this.qerClient.client.portal_itshop_prolongate_post(this.getUidPwo(pwo), input);
   }
 
@@ -207,8 +229,23 @@ export class RequestHistoryService {
       },
     });
 
-    item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]);
+    //item.UID_PwoSource.Column.PutValue(pwo.GetEntity().GetKeys()[0]); //kommentert bort, da det ikke fungerer å kopiere bestillinger hvor uid_profitcenter er satt.
     item.UID_PersonOrdered.Column.PutValue(pwo.UID_PersonOrdered.value);
+    //Egen kode - start
+     const requestable: RequestableProduct = {
+       Display: pwo.DisplayOrg.value,
+       DisplayRecipient: pwo.DisplayPersonOrdered.value,
+     };
+    const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(pwo.UID_PersonOrdered.value, requestable);
+    if (!selectedProfitCenter) {
+      return item; //Usikker på om denne blir riktig å returnere. Gjør ikke det i v92, men måtte ha en retur i v100
+    }
+    console.log('cart-items.service.ts: ' + selectedProfitCenter);
+    
+    item.UID_ITShopOrg.Column.PutValue(pwo.UID_Org.value);
+    item.UID_ProfitCenter.Column.PutValue(selectedProfitCenter);
+    item.OrderReason.Column.PutValue(pwo.OrderReason.value);
+    //Egen kode - slutt
 
     await this.qerClient.typedClient.PortalCartitem.Post(item);
 
