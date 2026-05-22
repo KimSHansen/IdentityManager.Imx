@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>{{DisplayPerson}} - {{DisplayProduct}}</h2>
 <div mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>{{'#LDS#Select profitcenter' | translate}}</mat-label>
-    <mat-select placeholder="{{'#LDS#Select profitcenter' | translate}}" [(value)]="selectedProfitCenter" (selectionChange)="getProfitCenterID($event.value)" required>
+    <mat-select [(value)]="selectedProfitCenter" (selectionChange)="getProfitCenterID($event.value)" required>
       @for(profitCenter of profitcenters; track profitCenter.UID_ProfitCenter){
       <mat-option [value]="profitCenter.UID_ProfitCenter">
         {{profitCenter.Display}}
