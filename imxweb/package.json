@@ -135,6 +135,7 @@
     "@imx-modules/imx-api-aob": "~10.0.0",
     "@imx-modules/imx-api-apc": "~10.0.0",
     "@imx-modules/imx-api-att": "~10.0.0",
+    "imx-api-ccc": "file:imx-modules/imx-api-ccc.tgz",
     "@imx-modules/imx-api-cpl": "~10.0.0",
     "@imx-modules/imx-api-dpr": "~10.0.0",
     "@imx-modules/imx-api-hds": "~10.0.0",
