@@ -1,3 +1,10 @@
+
+### May 26, 2026
+- 710276: Fixing an issue with Operations Support portal Pending Provisioning Processes page load overlay error.
+- 648928: Fixing an issue with user profile language not applied under certain circumstances.
+- 707565: Fixing an issue with ordering a product where the service item has a mandatory image form field.
+- 704328 (446299): Fixes an issue with adding a condition to a custom filter for system entitlements.
+
 ### April 17, 2026
 - 698600 (647825): Fixing an issue with an error on the Rule Violations page if the Riskindex config param is deactivated.
 - 494303: Fixes an issue with a missing badge for an active filter.
@@ -5,7 +12,6 @@
 - 703157: Fixes an issue with refactoring of the edit-fk.model.ts file.
 - 703180(697986): Fixes an issue with a missing warning if there are too many results for the search.
 - 496653: Adds support for decimal range report parameters.
-- 704328 (446299): Fixes an issue with adding a condition to a custom filter for system entitlements.
 - 703974: Fixes an issue with additional column values that are not loaded into a grouped table.
 
 ### March 26, 2026
