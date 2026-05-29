@@ -222,7 +222,7 @@ export class RequestHistoryService {
     return pwo.GetEntity().GetKeys()[0];
   }
 
-  public async copyRequest(pwo: PortalItshopRequests): Promise<PortalCartitem> {
+  public async copyRequest(pwo: PortalItshopRequests): Promise<PortalCartitem | undefined> { //Lagt til undefined, for å ikke returnere noe dersom dialogboks for valg av profitcenter avbrytes.
     const item = this.qerClient.typedClient.PortalCartitem.createEntity({
       Columns: {
         UID_AccProduct: { Value: pwo.UID_AccProduct.value },
@@ -238,9 +238,12 @@ export class RequestHistoryService {
      };
     const selectedProfitCenter = await this.spMultipleprofitcentersService.selectProfitCenter(pwo.UID_PersonOrdered.value, requestable);
     if (!selectedProfitCenter) {
-      return item; //Usikker på om denne blir riktig å returnere. Gjør ikke det i v92, men måtte ha en retur i v100
+      //Avbryter dialogboks for valg av profitcenter, så vi feiler denne. 
+      //Det blir da riktig i den kallende funksjonen i request-action.service.ts->copyItems() mtp. telling av valg som havner i handlekurv. 
+      //I tillegg får bruker en klar feil på at aktuelt produkt ikke kunne legges i handlekurv.
+      throw new Error('#LDS#The product copy was cancelled by the user.');
     }
-    console.log('cart-items.service.ts: ' + selectedProfitCenter);
+    //console.log('cart-items.service.ts: ' + selectedProfitCenter);
     
     item.UID_ITShopOrg.Column.PutValue(pwo.UID_Org.value);
     item.UID_ProfitCenter.Column.PutValue(selectedProfitCenter);
