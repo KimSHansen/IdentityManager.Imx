@@ -15,11 +15,11 @@ export class SpMultipleprofitcentersService {
 
   constructor(
     private dialog: MatDialog,    
-    private readonly appConfig: AppConfigService,
+    // private readonly appConfig: AppConfigService,
     private readonly translationProvider: ImxTranslationProviderService,
   ) {
-    const schemaProvider = appConfig.client;
-    this.v2Client = new V2Client(appConfig.apiClient, schemaProvider);
+    // const schemaProvider = appConfig.client;
+    // this.v2Client = new V2Client(appConfig.apiClient, schemaProvider);
     this.typedClient = new TypedClient(this.v2Client, this.translationProvider);
 
 
