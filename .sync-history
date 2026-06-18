@@ -1,1 +1,2 @@
-406dbad84 2026-04-20 Merged PR 92027: #704328 - Fix request filter
+83aec620e 2026-06-17 Merged PR 93487: #713974 - Web Portal: Fix SearchMode and RoleAssignmentsFilter reset in IT Shop and Attestation approval APIs
+23ef9ee39 2026-06-08 Merged PR 93299: PBI:#710272 - CPL: Fix column name casing for IsWorkingCopy filter

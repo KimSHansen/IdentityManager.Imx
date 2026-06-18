@@ -1,4 +1,8 @@
-
+### June 18, 2026
+- 710272: Fixing an issue with Rule violations filter column mismatch.
+- 722179: Fixing an issue with new request approval workflow valid dates.
+- 713974: Fixing an issue with search parameters not handled correctly with filter in some pages.
+ 
 ### May 26, 2026
 - 710276: Fixing an issue with Operations Support portal Pending Provisioning Processes page load overlay error.
 - 648928: Fixing an issue with user profile language not applied under certain circumstances.
