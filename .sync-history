@@ -1,2 +1,1 @@
-83aec620e 2026-06-17 Merged PR 93487: #713974 - Web Portal: Fix SearchMode and RoleAssignmentsFilter reset in IT Shop and Attestation approval APIs
-23ef9ee39 2026-06-08 Merged PR 93299: PBI:#710272 - CPL: Fix column name casing for IsWorkingCopy filter
+ebc8751bd 2026-06-29 Merged PR 93370: #713400 - Parallelize Web Portal initial page load (App + Start) and make Proj...
