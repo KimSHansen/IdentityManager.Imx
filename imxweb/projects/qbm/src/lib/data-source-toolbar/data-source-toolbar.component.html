@@ -151,9 +151,9 @@
   </mat-menu>
 
   <mat-menu #settingsMenu="matMenu">
-    <button *ngIf="settings?.dataModel?.AllowExport && settings?.exportMethod" mat-menu-item (click)="openExportSidesheet()" data-imx-identifier="dst-menu-button-export">
+    <!--<button *ngIf="settings?.dataModel?.AllowExport && settings?.exportMethod" mat-menu-item (click)="openExportSidesheet()" data-imx-identifier="dst-menu-button-export">
       {{ '#LDS#Export data' | translate }}
-    </button>
+    </button>-->
     <button mat-menu-item *ngIf="optionalColumns?.length > 0" (click)="updateAdditional()" data-imx-identifier="dst-menu-button-additional-table-columns">
       {{ '#LDS#Additional columns' | translate }}
     </button>
