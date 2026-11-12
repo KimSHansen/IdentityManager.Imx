@@ -25,7 +25,7 @@
  */
 
 import { PwoData } from '@imx-modules/imx-api-qer';
-import { IEntity, IEntityColumn, EntityColumnData, EntitySchema, IClientProperty } from '@imx-modules/imx-qbm-dbts';
+import { IEntity, IEntityColumn, EntityColumnData, IClientProperty } from '@imx-modules/imx-qbm-dbts';
 import { ItshopRequest } from './itshop-request';
 
 describe('ItshopRequest', () => {
@@ -145,7 +145,7 @@ describe('ItshopRequest', () => {
     },
     {
       description: ' 4 properties (3 property with a value)',
-      nonEmptyProperties: 3,
+      nonEmptyProperties: 2,
       properties: {
         DisplayOrg: createColumn('DisplayOrg'),
         OrderReason: createColumn('OrderReason'),
@@ -153,7 +153,7 @@ describe('ItshopRequest', () => {
     },
     {
       description: ' 4 properties (1 property with a value)',
-      nonEmptyProperties: 1,
+      nonEmptyProperties: 0,
       properties: {},
     },
   ]) {

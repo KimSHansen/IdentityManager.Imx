@@ -24,6 +24,7 @@
  *
  */
 
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ImxTranslationProviderService, imx_SessionService } from 'qbm';
 import { Observable } from 'rxjs';
@@ -45,6 +46,7 @@ describe('RoleMembershipsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RoleMembershipsComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         {
           provide: QerApiService,
