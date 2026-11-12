@@ -421,3 +421,18 @@ Throughout the code, customizations are marked with Norwegian comments:
 
 This convention helps identify custom code vs. upstream code for future maintenance.
 
+---
+
+## Latest Commit Customizations
+
+### 29. Address Book Button Disabled (MODIFIED)
+**Commit:** [Disable address book button in profile menu](https://github.com/KimSHansen/IdentityManager.Imx/commit/bd3cc4a1fc6ff0bf56a8f2f601ef07a7caf15d79) — 2026-11-12
+**Location:** `imxweb/projects/qer-app-portal/src/app/app.component.html`
+
+Commented out the Address book button in the profile menu. The `goToAddressbook()` action is no longer available from that menu.
+
+### 30. Export Button Disabled (MODIFIED)
+**Commit:** [Disable export button in settings menu](https://github.com/KimSHansen/IdentityManager.Imx/commit/41d9eac0e1a4fa2bbbe0a3be275cb44bc8b7bb25) — 2026-11-12
+**Location:** `imxweb/projects/qbm/src/lib/data-source-toolbar/data-source-toolbar.component.html`
+
+Commented out the Export data button in the data-source settings menu. Export is no longer available from that menu, even when the data model allows it.
